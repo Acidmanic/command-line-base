@@ -11,7 +11,6 @@ package acidmanic.commandline.commands;
  */
 public interface ICommandFactory {
 
-    String getCommandsHelp();
 
     ICommand makeCommand(String commandLine);
 
