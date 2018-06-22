@@ -5,11 +5,12 @@
  */
 package acidmanic.commandline.utility;
 
-import acidmanic.commandline.commands.CommandFactory;
+import acidmanic.commandline.application.Console;
 import acidmanic.commandline.commands.ICommand;
-import acidmanic.commandline.commands.ICommandFactory;
 import acidmanic.commandline.commands.ITypeRegistery;
+import com.acidmanic.consoletools.drawing.Padding;
 import com.acidmanic.consoletools.drawing.ascii.AsciiBorder;
+import com.acidmanic.consoletools.rendering.Renderable;
 import com.acidmanic.consoletools.table.Bordered;
 import com.acidmanic.consoletools.table.Cell;
 import com.acidmanic.consoletools.table.Row;
@@ -24,6 +25,8 @@ import java.util.HashMap;
 public class HelpGenerator {
 
     private HashMap<String, String> helps;
+    private final static int WIDTH_NAME = 24;
+    private final static int WIDTH_DESCRIPTION = 100;
 
     public HelpGenerator(ITypeRegistery registery) {
         this.helps = new HashMap<>();
@@ -44,14 +47,14 @@ public class HelpGenerator {
 
     private Row createRow(String name, String description, AsciiBorder border) {
         Row row = new Row();
-        if (border == null) {
-            row.getCells().add(new Cell(name));
-            row.getCells().add(new Cell(description));
-        } else {
-            row.getCells().add(new Bordered(new Cell(name), border));
-            row.getCells().add(new Bordered(new Cell(description), border));
+        Renderable nameCell = makeCell(name, WIDTH_NAME);
+        Renderable descCell = makeCell(description, WIDTH_DESCRIPTION);
+        if (border != null) {
+            nameCell = new Bordered(nameCell, border);
+            descCell = new Bordered(descCell, border);
         }
-
+        row.getCells().add(nameCell);
+        row.getCells().add(descCell);
         return row;
     }
 
@@ -63,6 +66,13 @@ public class HelpGenerator {
                     .add(createRow(name, description, border));
         }
         return helpTabel.render();
+    }
+
+    private Renderable makeCell(String name, int width) {
+        Cell cell = new Cell(name);
+        cell.setMaximumWidth(width);
+        cell.setPadding(new Padding(1, 0, 1, 1));
+        return cell;
     }
 
 }

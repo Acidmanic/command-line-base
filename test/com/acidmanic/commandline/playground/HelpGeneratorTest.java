@@ -6,6 +6,7 @@
 package com.acidmanic.commandline.playground;
 
 import acidmanic.commandline.commands.ApplicationWideCommandFactory;
+import acidmanic.commandline.commands.ApplicationWideTypeRegistery;
 
 /**
  *
@@ -13,12 +14,22 @@ import acidmanic.commandline.commands.ApplicationWideCommandFactory;
  */
 public class HelpGeneratorTest {
 
+
+    
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        ApplicationWideTypeRegistery.makeInstance()
+                .registerClass(Command1.class);
+        ApplicationWideTypeRegistery.makeInstance()
+                .registerClass(Command2.class);
+        ApplicationWideTypeRegistery.makeInstance()
+                .registerClass(Command3.class);
+        
         ApplicationWideCommandFactory.makeInstance()
                 .makeCommand("help").execute();
     }
-    
+
 }
