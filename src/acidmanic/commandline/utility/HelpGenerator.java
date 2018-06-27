@@ -34,7 +34,9 @@ public class HelpGenerator {
         for (Class commandClass : commands) {
             try {
                 ICommand command = (ICommand) commandClass.newInstance();
-                this.helps.put(command.getName(), command.getdescription());
+                if (command.isVisible()) {
+                    this.helps.put(command.getName(), command.getdescription());
+                }
             } catch (Exception e) {
             }
         }

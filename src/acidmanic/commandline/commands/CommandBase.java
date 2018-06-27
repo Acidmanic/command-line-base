@@ -10,7 +10,7 @@ abstract public class CommandBase implements ICommand {
     protected static final NullCommand NULLCOMMAND = new NullCommand();
     protected String[] args = new String[]{};
     protected ICommandFactory creatorFactory;
-
+    
     public static ICommand getNULL() {
         return NULLCOMMAND;
     }
@@ -92,5 +92,12 @@ abstract public class CommandBase implements ICommand {
     public String getName() {
         return this.getClass().getSimpleName();
     }
+
+    @Override
+    public boolean isVisible() {
+        return true;
+    }
+    
+    
 
 }
