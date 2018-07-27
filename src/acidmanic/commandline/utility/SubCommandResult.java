@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package acidmanic.commandline.commands;
+package acidmanic.commandline.utility;
 
-import acidmanic.commandline.utility.SubCommand;
+import acidmanic.commandline.commands.SubCommand;
 import java.util.ArrayList;
 import java.util.List;
 

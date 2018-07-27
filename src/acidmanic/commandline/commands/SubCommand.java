@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package acidmanic.commandline.utility;
-
-import acidmanic.commandline.commands.ICommand;
+package acidmanic.commandline.commands;
 
 /**
  *
@@ -13,6 +11,6 @@ import acidmanic.commandline.commands.ICommand;
  */
 public interface SubCommand extends ICommand {
 
-    int getNumberOfPickedArguments();
-    boolean isValid();
+    CommandValidationResult validate();
+
 }

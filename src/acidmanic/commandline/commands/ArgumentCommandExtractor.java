@@ -5,7 +5,7 @@
  */
 package acidmanic.commandline.commands;
 
-import acidmanic.commandline.utility.SubCommand;
+import acidmanic.commandline.utility.SubCommandResult;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +23,10 @@ public class ArgumentCommandExtractor {
         }
         String[] ret = new String[arguments.length - index];
         for (int i = index; i < arguments.length; i++) {
-            ret[i - index] = arguments[index];
+            ret[i - index] = arguments[i];
         }
         return ret;
     }
-
 
     public ArgumentCommandExtractor(TypeRegistery commandTypes) {
         this.commandFactory = new CommandFactory(commandTypes);
@@ -40,27 +39,46 @@ public class ArgumentCommandExtractor {
 
         int index = 0;
         while (index < arguments.length) {
-            String arg = arguments[0];
-            SubCommand command = getCommand(arguments, index);
-            if (command == null || !command.isValid()) {
+            String arg = arguments[index];
+            CommandResult result = getValidatedCommand(arguments, index);
+            if (!result.valid) {
                 exteras.add(arg);
                 index += 1;
             } else {
-                subCommands.add(command);
-                index += 1 + command.getNumberOfPickedArguments();
+                subCommands.add(result.command);
+                index += 1 + result.numberOfPickedArguments;
             }
         }
 
         return new SubCommandResult(subCommands, exteras);
     }
 
-    private SubCommand getCommand(String[] arguments, int index) {
+    private class CommandResult {
+
+        public boolean valid;
+        public SubCommand command;
+        public int numberOfPickedArguments;
+    }
+
+    private CommandResult getValidatedCommand(String[] arguments, int index) {
+
+        CommandResult result = new CommandResult();
+        result.valid = false;
         try {
             String[] args = getSubArray(arguments, index);
-            return (SubCommand) this.commandFactory.makeCommand(args);
+            ICommand command = this.commandFactory.makeCommand(args);
+            if (command instanceof SubCommand) {
+                result.command = (SubCommand) command;
+                CommandValidationResult validationResult = result.command.validate();
+                if (validationResult.isIsValid()) {
+                    result.numberOfPickedArguments = validationResult.getNumberOfPickedArguments();
+                    result.valid = true;
+                    return result;
+                }
+            }
         } catch (Exception e) {
         }
-        return null;
+        return result;
     }
 
 }
