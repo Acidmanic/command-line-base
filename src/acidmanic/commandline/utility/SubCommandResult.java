@@ -5,7 +5,7 @@
  */
 package acidmanic.commandline.utility;
 
-import acidmanic.commandline.commands.SubCommand;
+import acidmanic.commandline.commands.subcommands.SubCommand;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;

@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package acidmanic.commandline.commands;
+package acidmanic.commandline.commands.subcommands;
+
+import acidmanic.commandline.commands.ICommand;
 
 /**
  *

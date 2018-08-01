@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package acidmanic.commandline.commands;
+package acidmanic.commandline.commands.subcommands;
 
+import acidmanic.commandline.commands.CommandFactory;
+import acidmanic.commandline.commands.ICommand;
+import acidmanic.commandline.commands.ICommandFactory;
+import acidmanic.commandline.commands.TypeRegistery;
 import acidmanic.commandline.utility.SubCommandResult;
 import java.util.ArrayList;
 import java.util.List;
