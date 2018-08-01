@@ -6,6 +6,7 @@
 package acidmanic.commandline.utility;
 
 import acidmanic.commandline.commands.SubCommand;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,18 +15,23 @@ import java.util.List;
  * @author Mani Moayedi (acidmanic.moayedi@gmail.com)
  */
 public class SubCommandResult {
-    
+
     private List<SubCommand> subCommands;
     private List<String> otherArguments;
+    private List<SubCommand> helpCommands;
 
     public SubCommandResult() {
         this.subCommands = new ArrayList<>();
         this.otherArguments = new ArrayList<>();
+        this.helpCommands = new ArrayList<>();
     }
 
-    public SubCommandResult(List<SubCommand> subCommands, List<String> otherArguments) {
+    public SubCommandResult(List<SubCommand> subCommands,
+            List<String> otherArguments,
+            List<SubCommand> helpCommands) {
         this.subCommands = subCommands;
         this.otherArguments = otherArguments;
+        this.helpCommands = helpCommands;
     }
 
     public List<SubCommand> getSubCommands() {
@@ -43,5 +49,17 @@ public class SubCommandResult {
     public void setOtherArguments(List<String> otherArguments) {
         this.otherArguments = otherArguments;
     }
-    
+
+    public List<SubCommand> getHelpCommands() {
+        return helpCommands;
+    }
+
+    public void setHelpCommands(List<SubCommand> helpCommands) {
+        this.helpCommands = helpCommands;
+    }
+
+    public boolean containsHelp() {
+        return this.helpCommands != null && this.helpCommands.size() > 0;
+    }
+
 }

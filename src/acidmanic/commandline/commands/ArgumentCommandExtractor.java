@@ -36,6 +36,7 @@ public class ArgumentCommandExtractor {
 
         List<String> exteras = new ArrayList<>();
         List<SubCommand> subCommands = new ArrayList<>();
+        List<SubCommand> helpCommands = new ArrayList<>();
 
         int index = 0;
         while (index < arguments.length) {
@@ -45,12 +46,16 @@ public class ArgumentCommandExtractor {
                 exteras.add(arg);
                 index += 1;
             } else {
-                subCommands.add(result.command);
+                if (result.command.isHelp()) {
+                    helpCommands.add(result.command);
+                } else {
+                    subCommands.add(result.command);
+                }
                 index += 1 + result.numberOfPickedArguments;
             }
         }
 
-        return new SubCommandResult(subCommands, exteras);
+        return new SubCommandResult(subCommands, exteras,helpCommands);
     }
 
     private class CommandResult {

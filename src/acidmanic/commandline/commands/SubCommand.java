@@ -12,5 +12,5 @@ package acidmanic.commandline.commands;
 public interface SubCommand extends ICommand {
 
     CommandValidationResult validate();
-
+    boolean isHelp();
 }
