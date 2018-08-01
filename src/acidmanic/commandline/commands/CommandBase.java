@@ -1,22 +1,19 @@
-
 package acidmanic.commandline.commands;
 
 abstract public class CommandBase implements ICommand {
 
-    
     protected String[] args = new String[]{};
     protected ICommandFactory creatorFactory;
-    
+
     protected abstract String getUsageString();
-    
-    
+
     protected Boolean noArguments() {
         return noArguments(1);
     }
 
     @Override
     public void setCreatorFactory(ICommandFactory factory) {
-        this.creatorFactory=factory;
+        this.creatorFactory = factory;
     }
 
     @Override
@@ -37,15 +34,14 @@ abstract public class CommandBase implements ICommand {
 
     /**
      * If your command takes any arguments, you can override this function and
-     * return a declaration for them to be used in description. ex.: 
+     * return a declaration for them to be used in description. ex.:
      * &lt;date:yyyy-MM-dd&gt;
-     * @return 
+     *
+     * @return
      */
     protected String declareArguments() {
         return "";
     }
-
-   
 
     @Override
     public void setArguments(String[] args) {
@@ -54,7 +50,13 @@ abstract public class CommandBase implements ICommand {
 
     @Override
     public String getdescription() {
-        return declareArguments() + "\n" + getUsageString();
+        String argsdec = declareArguments().trim();
+        String sep = "\n";
+        if (argsdec == null || argsdec.length() == 0) {
+            sep = "";
+            argsdec = "";
+        }
+        return argsdec + sep + getUsageString();
     }
 
     @Override
@@ -66,7 +68,7 @@ abstract public class CommandBase implements ICommand {
     public boolean isVisible() {
         return true;
     }
-    
+
     /**
      * returns true if any error happens
      *
@@ -106,9 +108,9 @@ abstract public class CommandBase implements ICommand {
 
     /**
      *
-     * @param startIndex 
-     * @return This function will concatenate all arguments, starting from 
-     * (and including) <code>startIndex</code>.
+     * @param startIndex
+     * @return This function will concatenate all arguments, starting from (and
+     * including) <code>startIndex</code>.
      */
     protected String allArgsAsCommand(int startIndex) {
         String ret = "";
