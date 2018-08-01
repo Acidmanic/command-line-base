@@ -1,20 +1,15 @@
-//
-// Translated by CS2J (http://www.cs2j.com): 4/28/2016 9:15:43 PM
-//
-package acidmanic.commandline.commands;
 
-import acidmanic.commandline.application.Console;
+package acidmanic.commandline.commands;
 
 abstract public class CommandBase implements ICommand {
 
-    protected static final NullCommand NULLCOMMAND = new NullCommand();
+    
     protected String[] args = new String[]{};
     protected ICommandFactory creatorFactory;
     
-    public static ICommand getNULL() {
-        return NULLCOMMAND;
-    }
-
+    protected abstract String getUsageString();
+    
+    
     protected Boolean noArguments() {
         return noArguments(1);
     }
@@ -33,15 +28,6 @@ abstract public class CommandBase implements ICommand {
         return (args == null || args.length < numberOfArgumentsNeeded);
     }
 
-    protected int readIntArg(int index, int def) {
-        try {
-            return Integer.parseInt(args[index]);
-        } catch (Exception __dummyCatchVar0) {
-            return def;
-        }
-
-    }
-
     protected int getArgsCount() {
         if (args == null || args.length == 0) {
             return 0;
@@ -49,36 +35,17 @@ abstract public class CommandBase implements ICommand {
         return args.length;
     }
 
-    public static class NullCommand extends CommandBase {
-
-        @Override
-        public void execute() {
-            Console.WriteLine("No Such Command!");
-        }
-
-        @Override
-        public String getdescription() {
-            return "No Such Command!";
-        }
-
-        @Override
-        public String getName() {
-            return "*";
-        }
-
-        @Override
-        public void setCreatorFactory(ICommandFactory factory) {
-        }
-
-        @Override
-        public ICommandFactory getCreatorFactory() {
-            return null;
-        }
-
+    /**
+     * If your command takes any arguments, you can override this function and
+     * return a declaration for them to be used in description. ex.: 
+     * &lt;date:yyyy-MM-dd&gt;
+     * @return 
+     */
+    protected String declareArguments() {
+        return "";
     }
 
-    @Override
-    public abstract void execute();
+   
 
     @Override
     public void setArguments(String[] args) {
@@ -86,7 +53,9 @@ abstract public class CommandBase implements ICommand {
     }
 
     @Override
-    public abstract String getdescription();
+    public String getdescription() {
+        return declareArguments() + "\n" + getUsageString();
+    }
 
     @Override
     public String getName() {
@@ -98,6 +67,57 @@ abstract public class CommandBase implements ICommand {
         return true;
     }
     
-    
+    /**
+     * returns true if any error happens
+     *
+     * @param numberOfArguments
+     * @return
+     */
+    protected boolean argumentCheck(int numberOfArguments) {
+        if (noArguments(numberOfArguments)) {
+            argumentError();
+            return true;
+        }
+        return false;
+    }
+
+    protected void log(String text) {
+        System.out.println(text);
+    }
+
+    protected void argumentError() {
+        log("Argument error. usage:\n" + declareArguments());
+    }
+
+    protected void error(String message) {
+        log(message);
+        log(this.getName() + this.declareArguments());
+        log(this.getUsageString());
+    }
+
+    /**
+     *
+     * @return This function will concatenate all arguments together separating
+     * with a space.
+     */
+    protected String allArgsAsCommand() {
+        return allArgsAsCommand(0);
+    }
+
+    /**
+     *
+     * @param startIndex 
+     * @return This function will concatenate all arguments, starting from 
+     * (and including) <code>startIndex</code>.
+     */
+    protected String allArgsAsCommand(int startIndex) {
+        String ret = "";
+        String sep = "";
+        for (int i = startIndex; i < args.length; i++) {
+            ret += sep + args[i];
+            sep = " ";
+        }
+        return ret;
+    }
 
 }

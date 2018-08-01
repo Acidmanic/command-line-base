@@ -18,7 +18,7 @@ public class Command2 extends CommandBase {
     }
 
     @Override
-    public String getdescription() {
+    public String getUsageString() {
         return "This is a preformated description." 
                 + "\n for example:" + "\n" 
                 + "\n\tThis is the first sub line" 

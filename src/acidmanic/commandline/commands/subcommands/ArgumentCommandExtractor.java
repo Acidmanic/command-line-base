@@ -9,7 +9,6 @@ import acidmanic.commandline.commands.CommandFactory;
 import acidmanic.commandline.commands.ICommand;
 import acidmanic.commandline.commands.ICommandFactory;
 import acidmanic.commandline.commands.ITypeRegistery;
-import acidmanic.commandline.commands.TypeRegistery;
 import acidmanic.commandline.utility.SubCommandResult;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +33,6 @@ public class ArgumentCommandExtractor {
     }
 
     public ArgumentCommandExtractor(ITypeRegistery commandTypes) {
-        //TODO: this may make issues in commandType object's life cycle
-        //its better to clone it before giving to command factory
-        commandTypes.registerClass(HelpSubCommand.class);
         this.commandFactory = new CommandFactory(commandTypes);
     }
 

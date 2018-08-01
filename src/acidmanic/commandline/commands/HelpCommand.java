@@ -17,13 +17,13 @@ public class HelpCommand extends CommandBase {
     }
 
     @Override
-    public String getdescription() {
-        return "Shows This Help.";
+    public String getName() {
+        return "Help";
     }
 
     @Override
-    public String getName() {
-        return "Help";
+    protected String getUsageString() {
+        return "Prints this help.";
     }
 
 }

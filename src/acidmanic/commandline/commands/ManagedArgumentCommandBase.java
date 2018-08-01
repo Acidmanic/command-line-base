@@ -6,6 +6,7 @@
 package acidmanic.commandline.commands;
 
 import acidmanic.commandline.commands.subcommands.ArgumentCommandExtractor;
+import acidmanic.commandline.commands.subcommands.HelpSubCommand;
 import acidmanic.commandline.utility.SubCommandResult;
 
 /**
@@ -20,7 +21,17 @@ public abstract class ManagedArgumentCommandBase extends CommandBase {
         this.typeRegistery = typeRegistery;
     }
 
+    protected void registerAdditionalSubCommands(ITypeRegistery typeRegistery) {
+        typeRegistery.registerClass(HelpSubCommand.class);
+
+    }
+
     protected SubCommandResult getSubCommands() {
+
+        //TODO: this may make issues in commandType object's life cycle
+        //its better to clone it before giving to command factory
+        registerAdditionalSubCommands(typeRegistery);
+
         ArgumentCommandExtractor extractor = new ArgumentCommandExtractor(typeRegistery);
         return extractor.processSubCommands(args);
     }
@@ -35,6 +46,5 @@ public abstract class ManagedArgumentCommandBase extends CommandBase {
         subExecute(subCommandResult);
     }
 
-    
     protected abstract void subExecute(SubCommandResult subCommandResult);
 }

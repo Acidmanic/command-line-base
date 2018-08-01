@@ -92,12 +92,12 @@ public class CommandFactory implements ICommandFactory {
                 ret.setCreatorFactory(this);
                 return ret;
             } catch (Exception e) {
-                return CommandBase.getNULL();
+                return ICommand.NULLCOMMAND;
             }
 
         }
 
-        return CommandBase.getNULL();
+        return ICommand.NULLCOMMAND;
     }
 
     @Override

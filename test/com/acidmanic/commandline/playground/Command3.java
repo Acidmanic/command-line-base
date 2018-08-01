@@ -18,7 +18,7 @@ public class Command3 extends CommandBase {
     }
 
     @Override
-    public String getdescription() {
+    public String getUsageString() {
         return "This is a preformated description. this command has a long name which should break";
     }
 

@@ -5,6 +5,8 @@ package acidmanic.commandline.commands;
 
 public interface ICommand {
 
+    
+    static final NullCommand NULLCOMMAND = new NullCommand();
     /**
      *
      */

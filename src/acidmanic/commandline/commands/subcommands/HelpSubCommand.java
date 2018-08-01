@@ -45,6 +45,9 @@ public class HelpSubCommand extends CommandBase implements SubCommand {
         return "Help";
     }
 
+    @Override
+    protected String getUsageString() {return "";}
+
     
 
 }
