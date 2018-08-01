@@ -33,6 +33,7 @@ public class ArgumentCommandExtractor {
     }
 
     public ArgumentCommandExtractor(TypeRegistery commandTypes) {
+        commandTypes.registerClass(HelpSubCommand.class);
         this.commandFactory = new CommandFactory(commandTypes);
     }
 
