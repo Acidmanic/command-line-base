@@ -75,6 +75,12 @@ public class CommandFactory implements ICommandFactory {
         }
     }
 
+    public ITypeRegistery getTypeRegistery() {
+        return typeRegistery;
+    }
+    
+    
+
     private ICommand makeCommand(CommandLine commandLine) {
         ICommand ret;
         String cmd = commandLine.getName().toLowerCase();
