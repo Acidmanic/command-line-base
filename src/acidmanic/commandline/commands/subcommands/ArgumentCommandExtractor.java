@@ -39,8 +39,8 @@ public class ArgumentCommandExtractor {
     public SubCommandResult processSubCommands(String[] arguments) {
 
         List<String> exteras = new ArrayList<>();
-        List<SubCommand> subCommands = new ArrayList<>();
-        List<SubCommand> helpCommands = new ArrayList<>();
+        List<ICommand> subCommands = new ArrayList<>();
+        List<ICommand> helpCommands = new ArrayList<>();
 
         int index = 0;
         while (index < arguments.length) {
@@ -50,10 +50,10 @@ public class ArgumentCommandExtractor {
                 exteras.add(arg);
                 index += 1;
             } else {
-                if (result.command.isHelp()) {
-                    helpCommands.add(result.command);
+                if (result.commandAsCommand.isHelp()) {
+                    helpCommands.add(result.commandAsCommand);
                 } else {
-                    subCommands.add(result.command);
+                    subCommands.add(result.commandAsCommand);
                 }
                 index += 1 + result.numberOfPickedArguments;
             }
@@ -65,7 +65,8 @@ public class ArgumentCommandExtractor {
     private class CommandResult {
 
         public boolean valid;
-        public SubCommand command;
+        public Validatable commandAsValidatable;
+        public ICommand commandAsCommand;
         public int numberOfPickedArguments;
     }
 
@@ -76,9 +77,10 @@ public class ArgumentCommandExtractor {
         try {
             String[] args = getSubArray(arguments, index);
             ICommand command = this.commandFactory.makeCommand(args);
-            if (command instanceof SubCommand) {
-                result.command = (SubCommand) command;
-                CommandValidationResult validationResult = result.command.validate();
+            if (command instanceof Validatable) {
+                result.commandAsValidatable = (Validatable) command;
+                result.commandAsCommand = command;
+                CommandValidationResult validationResult = result.commandAsValidatable.validate();
                 if (validationResult.isIsValid()) {
                     result.numberOfPickedArguments = validationResult.getNumberOfPickedArguments();
                     result.valid = true;

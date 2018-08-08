@@ -122,4 +122,12 @@ abstract public class CommandBase implements ICommand {
         return ret;
     }
 
+    @Override
+    public boolean isHelp() {
+        return false;
+    }
+    
+    
+    
+
 }

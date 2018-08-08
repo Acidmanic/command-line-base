@@ -26,4 +26,11 @@ public class HelpCommand extends CommandBase {
         return "Prints this help.";
     }
 
+    @Override
+    public boolean isHelp() {
+        return true;
+    }
+    
+    
+
 }

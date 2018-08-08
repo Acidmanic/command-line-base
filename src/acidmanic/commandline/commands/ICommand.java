@@ -23,4 +23,6 @@ public interface ICommand {
     ICommandFactory getCreatorFactory();
 
     boolean isVisible();
+    
+    boolean isHelp();
 }

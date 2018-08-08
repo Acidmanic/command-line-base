@@ -5,14 +5,12 @@
  */
 package acidmanic.commandline.commands.subcommands;
 
-import acidmanic.commandline.commands.ICommand;
-
 /**
  *
  * @author Mani Moayedi (acidmanic.moayedi@gmail.com)
  */
-public interface SubCommand extends ICommand {
+public interface Validatable {
 
     CommandValidationResult validate();
-    boolean isHelp();
+    
 }

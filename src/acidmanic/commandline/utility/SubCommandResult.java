@@ -5,9 +5,10 @@
  */
 package acidmanic.commandline.utility;
 
-import acidmanic.commandline.commands.subcommands.SubCommand;
+import acidmanic.commandline.commands.ICommand;
 import java.util.ArrayList;
 import java.util.List;
+import acidmanic.commandline.commands.subcommands.Validatable;
 
 /**
  *
@@ -15,9 +16,9 @@ import java.util.List;
  */
 public class SubCommandResult {
 
-    private List<SubCommand> subCommands;
+    private List<ICommand> subCommands;
     private List<String> otherArguments;
-    private List<SubCommand> helpCommands;
+    private List<ICommand> helpCommands;
 
     public SubCommandResult() {
         this.subCommands = new ArrayList<>();
@@ -25,19 +26,19 @@ public class SubCommandResult {
         this.helpCommands = new ArrayList<>();
     }
 
-    public SubCommandResult(List<SubCommand> subCommands,
+    public SubCommandResult(List<ICommand> subCommands,
             List<String> otherArguments,
-            List<SubCommand> helpCommands) {
+            List<ICommand> helpCommands) {
         this.subCommands = subCommands;
         this.otherArguments = otherArguments;
         this.helpCommands = helpCommands;
     }
 
-    public List<SubCommand> getSubCommands() {
+    public List<ICommand> getSubCommands() {
         return subCommands;
     }
 
-    public void setSubCommands(List<SubCommand> subCommands) {
+    public void setSubCommands(List<ICommand> subCommands) {
         this.subCommands = subCommands;
     }
 
@@ -49,11 +50,11 @@ public class SubCommandResult {
         this.otherArguments = otherArguments;
     }
 
-    public List<SubCommand> getHelpCommands() {
+    public List<ICommand> getHelpCommands() {
         return helpCommands;
     }
 
-    public void setHelpCommands(List<SubCommand> helpCommands) {
+    public void setHelpCommands(List<ICommand> helpCommands) {
         this.helpCommands = helpCommands;
     }
 

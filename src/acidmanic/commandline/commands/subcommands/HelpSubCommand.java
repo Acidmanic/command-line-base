@@ -14,7 +14,7 @@ import acidmanic.commandline.utility.HelpGenerator;
  *
  * @author Mani Moayedi (acidmanic.moayedi@gmail.com)
  */
-public class HelpSubCommand extends CommandBase implements SubCommand {
+public class HelpSubCommand extends CommandBase implements Validatable {
 
     @Override
     public void execute() {
