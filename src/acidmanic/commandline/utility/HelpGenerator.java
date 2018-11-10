@@ -5,16 +5,11 @@
  */
 package acidmanic.commandline.utility;
 
-import acidmanic.commandline.application.Console;
 import acidmanic.commandline.commands.ICommand;
 import acidmanic.commandline.commands.ITypeRegistery;
+import com.acidmanic.consoletools.drawing.AsciiBorder;
 import com.acidmanic.consoletools.drawing.Padding;
-import com.acidmanic.consoletools.drawing.ascii.AsciiBorder;
-import com.acidmanic.consoletools.rendering.Renderable;
-import com.acidmanic.consoletools.table.Bordered;
-import com.acidmanic.consoletools.table.Cell;
-import com.acidmanic.consoletools.table.Row;
-import com.acidmanic.consoletools.table.Table;
+import com.acidmanic.consoletools.table.builders.TableBuilder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -47,34 +42,17 @@ public class HelpGenerator {
         return generateHelp(null);
     }
 
-    private Row createRow(String name, String description, AsciiBorder border) {
-        Row row = new Row();
-        Renderable nameCell = makeCell(name, WIDTH_NAME);
-        Renderable descCell = makeCell(description, WIDTH_DESCRIPTION);
-        if (border != null) {
-            nameCell = new Bordered(nameCell, border);
-            descCell = new Bordered(descCell, border);
-        }
-        row.getCells().add(nameCell);
-        row.getCells().add(descCell);
-        return row;
-    }
 
     public String generateHelp(AsciiBorder border) {
-        Table helpTabel = new Table();
+        TableBuilder builder = new TableBuilder();
+        Padding padding = new Padding(1, 0, 1, 0);
         for (String name : helps.keySet()) {
             String description = helps.get(name);
-            helpTabel.getRows()
-                    .add(createRow(name, description, border));
+            builder.row().cell(name).maximumWidth(WIDTH_NAME)
+                    .cell(description).maximumWidth(WIDTH_DESCRIPTION);
         }
-        return helpTabel.render();
-    }
-
-    private Renderable makeCell(String name, int width) {
-        Cell cell = new Cell(name);
-        cell.setMaximumWidth(width);
-        cell.setPadding(new Padding(1, 0, 1, 1));
-        return cell;
+        return builder.padAll(padding).borderAll(border)
+                .build().render();
     }
 
 }
