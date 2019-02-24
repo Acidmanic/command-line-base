@@ -11,7 +11,7 @@ import java.util.ArrayList;
 abstract public class BatchCommandBase  extends CommandBase 
 {
     private ArrayList<String> commandLines = new ArrayList<>();
-    private ICommandFactory factory;
+    private final ICommandFactory factory;
     
     
     public BatchCommandBase(ICommandFactory factory) {
@@ -28,7 +28,6 @@ abstract public class BatchCommandBase  extends CommandBase
         setupCommandLines(commandLines);
         for (String command : commandLines)
         {
-            //System.out.println("Executing " +command);
             c = factory.makeCommand(command);
             c.execute();
         }

@@ -10,7 +10,6 @@ import java.util.HashMap;
 public class CommandFactory implements ICommandFactory {
 
     private HashMap<String, Class> typeList = new HashMap<>();
-    private String help = new String();
     private final ITypeRegistery typeRegistery;
 
     public CommandFactory(ITypeRegistery typeRegistery) {
@@ -33,16 +32,8 @@ public class CommandFactory implements ICommandFactory {
                 }
             }
         }
-        help = "";
-        for (String cmdName : typeList.keySet()) {
-            help += gethelp(typeList.get(cmdName), fixedLength) + "\n";
-        }
     }
-    
-    
-    
-    
-    
+
     private class CommandLine {
 
         private String name;
@@ -75,13 +66,19 @@ public class CommandFactory implements ICommandFactory {
         try {
             ICommand cmd = (ICommand) t.newInstance();
             String name = cmd.getName();
-            while(name.length()<length) name +=" ";
-            return   name +"  " + cmd.getdescription();
+            while (name.length() < length) {
+                name += " ";
+            }
+            return name + "  " + cmd.getdescription();
         } catch (Exception e) {
             return "";
         }
     }
 
+    public ITypeRegistery getTypeRegistery() {
+        return typeRegistery;
+    }
+    
     
 
     private ICommand makeCommand(CommandLine commandLine) {
@@ -95,12 +92,12 @@ public class CommandFactory implements ICommandFactory {
                 ret.setCreatorFactory(this);
                 return ret;
             } catch (Exception e) {
-                return CommandBase.getNULL();
+                return ICommand.NULLCOMMAND;
             }
 
         }
 
-        return CommandBase.getNULL();
+        return ICommand.NULLCOMMAND;
     }
 
     @Override
@@ -122,11 +119,6 @@ public class CommandFactory implements ICommandFactory {
             args[i] = PromptArgs[i + 1];
         }
         return new CommandLine(PromptArgs[0], args);
-    }
-
-    @Override
-    public String getCommandsHelp() {
-        return help;
     }
 
     private CommandLine analyzeLine(String commandline) {

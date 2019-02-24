@@ -3,17 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package acidmanic.commandline.commands;
+package acidmanic.commandline.commands.subcommands;
 
 /**
  *
- * @author diego
+ * @author Mani Moayedi (acidmanic.moayedi@gmail.com)
  */
-public interface ICommandFactory {
+public interface Validatable {
 
-
-    ICommand makeCommand(String commandLine);
-
-    ICommand makeCommand(String[] PromptArgs);
+    CommandValidationResult validate();
     
 }
