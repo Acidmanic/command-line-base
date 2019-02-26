@@ -81,6 +81,15 @@ public class ExecutionEnvironment {
     }
     
     
+    public void execute(String args){
+        ICommandFactory factory = new CommandFactory(this.typeRegistery);
+        
+        ICommand command = factory.makeCommand(args);
+        
+        command.execute();
+    }
+    
+    
     
     
 }

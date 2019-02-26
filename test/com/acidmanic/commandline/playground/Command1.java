@@ -15,6 +15,7 @@ public class Command1 extends CommandBase {
     
     @Override
     public void execute() {
+        System.out.println(this.getClass().getSimpleName()+ " has been executed");
     }
 
     @Override
