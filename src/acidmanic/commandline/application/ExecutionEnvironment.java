@@ -10,6 +10,8 @@ import acidmanic.commandline.commands.CommandFactory;
 import acidmanic.commandline.commands.ITypeRegistery;
 import acidmanic.commandline.commands.Command;
 import acidmanic.commandline.commands.CommandSequenceParser;
+import acidmanic.commandline.commands.HelpCommand;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +25,8 @@ public class ExecutionEnvironment {
     
     private ITypeRegistery typeRegistery;
 
+    private boolean helpExecuted;
+    
     public ExecutionEnvironment() {
         
         this.dataRepository = new ExecutionDataRepository();
@@ -79,13 +83,39 @@ public class ExecutionEnvironment {
         
         List<Command> commands = parser.parse(args);
         
+        commands = filterHelp(commands);
+        
         for(Command c:commands){
             
             c.setExecutionEnvironment(this);
             
             c.execute();
+            
+            if(c instanceof HelpCommand){
+                this.helpExecuted = true;
+            }
         }
     }
+
+    private List<Command> filterHelp(List<Command> commands) {
+        ArrayList<Command> ret = new ArrayList<>();
+        
+        for(Command c :commands){
+            if(c instanceof HelpCommand){
+                ArrayList<Command> help = new ArrayList<>();
+                help.add(c);
+                return help;
+            }
+            ret.add(c);
+        }
+        return ret;
+    }
+
+    public boolean isHelpExecuted() {
+        return helpExecuted;
+    }
+    
+    
     
   
     
