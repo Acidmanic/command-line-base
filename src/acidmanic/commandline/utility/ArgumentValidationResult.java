@@ -3,30 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package acidmanic.commandline.commands.subcommands;
+package acidmanic.commandline.utility;
 
 /**
  *
  * @author Mani Moayedi (acidmanic.moayedi@gmail.com)
  */
-public class CommandValidationResult {
-    private boolean  isValid;
+public class ArgumentValidationResult {
+
     private int numberOfPickedArguments;
 
-    public CommandValidationResult() {
+    public ArgumentValidationResult() {
     }
 
-    public CommandValidationResult(boolean isValid, int numberOfPickedArguments) {
-        this.isValid = isValid;
+    public ArgumentValidationResult(int numberOfPickedArguments) {
         this.numberOfPickedArguments = numberOfPickedArguments;
-    }
-
-    public boolean isIsValid() {
-        return isValid;
-    }
-
-    public void setIsValid(boolean isValid) {
-        this.isValid = isValid;
     }
 
     public int getNumberOfPickedArguments() {
@@ -38,6 +29,7 @@ public class CommandValidationResult {
     }
     
     
+
     
     
 }

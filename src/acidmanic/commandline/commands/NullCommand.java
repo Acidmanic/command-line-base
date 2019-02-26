@@ -29,11 +29,11 @@ public class NullCommand extends CommandBase {
     }
 
     @Override
-    public void setCreatorFactory(ICommandFactory factory) {
+    public void setCreatorFactory(CommandFactory factory) {
     }
 
     @Override
-    public ICommandFactory getCreatorFactory() {
+    public CommandFactory getCreatorFactory() {
         return null;
     }
 

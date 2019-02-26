@@ -1,13 +1,11 @@
-//
-// Translated by CS2J (http://www.cs2j.com): 4/28/2016 9:15:43 PM
-//
+
 package acidmanic.commandline.commands;
 
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CommandFactory implements ICommandFactory {
+public class CommandFactory  {
 
     private HashMap<String, Class> typeList = new HashMap<>();
     private final ITypeRegistery typeRegistery;
@@ -23,7 +21,7 @@ public class CommandFactory implements ICommandFactory {
                     && !Modifier.isInterface(mod)
                     && isICommand(t)) {
                 try {
-                    String cmdName = ((ICommand) t.newInstance()).getName();
+                    String cmdName = ((Command) t.newInstance()).getName();
                     typeList.put(cmdName.toLowerCase(), t);
                     if (fixedLength < cmdName.length()) {
                         fixedLength = cmdName.length();
@@ -59,54 +57,40 @@ public class CommandFactory implements ICommandFactory {
     }
 
     private boolean isICommand(Class t) {
-        return typeRegistery.isOfType(t, ICommand.class);
+        return typeRegistery.isOfType(t, Command.class);
     }
 
-    private String gethelp(Class t, int length) {
-        try {
-            ICommand cmd = (ICommand) t.newInstance();
-            String name = cmd.getName();
-            while (name.length() < length) {
-                name += " ";
-            }
-            return name + "  " + cmd.getdescription();
-        } catch (Exception e) {
-            return "";
-        }
-    }
-
+    
     public ITypeRegistery getTypeRegistery() {
         return typeRegistery;
     }
     
     
 
-    private ICommand makeCommand(CommandLine commandLine) {
-        ICommand ret;
+    private Command makeCommand(CommandLine commandLine) {
+        Command ret;
         String cmd = commandLine.getName().toLowerCase();
         if (typeList.containsKey(cmd)) {
             Class t = typeList.get(cmd);
             try {
-                ret = (ICommand) t.newInstance();
+                ret = (Command) t.newInstance();
                 ret.setArguments(commandLine.getArgs());
                 ret.setCreatorFactory(this);
                 return ret;
             } catch (Exception e) {
-                return ICommand.NULLCOMMAND;
+                return Command.NULLCOMMAND;
             }
 
         }
 
-        return ICommand.NULLCOMMAND;
+        return Command.NULLCOMMAND;
     }
 
-    @Override
-    public ICommand makeCommand(String commandLine) {
+    public Command makeCommand(String commandLine) {
         return makeCommand(analyzeLine(commandLine));
     }
 
-    @Override
-    public ICommand makeCommand(String[] PromptArgs) {
+    public Command makeCommand(String[] PromptArgs) {
         return makeCommand(getnameAndArgs(PromptArgs));
     }
 

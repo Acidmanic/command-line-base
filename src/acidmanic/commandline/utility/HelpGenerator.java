@@ -5,13 +5,13 @@
  */
 package acidmanic.commandline.utility;
 
-import acidmanic.commandline.commands.ICommand;
 import acidmanic.commandline.commands.ITypeRegistery;
 import com.acidmanic.consoletools.drawing.AsciiBorder;
 import com.acidmanic.consoletools.drawing.Padding;
 import com.acidmanic.consoletools.table.builders.TableBuilder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import acidmanic.commandline.commands.Command;
 
 /**
  *
@@ -25,10 +25,10 @@ public class HelpGenerator {
 
     public HelpGenerator(ITypeRegistery registery) {
         this.helps = new HashMap<>();
-        ArrayList<Class> commands = registery.getClasses(ICommand.class);
+        ArrayList<Class> commands = registery.getClasses(Command.class);
         for (Class commandClass : commands) {
             try {
-                ICommand command = (ICommand) commandClass.newInstance();
+                Command command = (Command) commandClass.newInstance();
                 if (command.isVisible()) {
                     this.helps.put(command.getName(), command.getdescription());
                 }

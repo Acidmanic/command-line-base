@@ -5,8 +5,9 @@
  */
 package com.acidmanic.commandline.playground;
 
-import acidmanic.commandline.commands.ApplicationWideCommandFactory;
 import acidmanic.commandline.commands.ApplicationWideTypeRegistery;
+import acidmanic.commandline.commands.CommandFactory;
+import acidmanic.commandline.commands.TypeRegistery;
 
 /**
  *
@@ -21,15 +22,17 @@ public class HelpGeneratorTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ApplicationWideTypeRegistery.makeInstance()
-                .registerClass(Command1.class);
-        ApplicationWideTypeRegistery.makeInstance()
-                .registerClass(Command2.class);
-        ApplicationWideTypeRegistery.makeInstance()
-                .registerClass(Command3.class);
         
-        ApplicationWideCommandFactory.makeInstance()
-                .makeCommand("help").execute();
+        
+        TypeRegistery registery = ApplicationWideTypeRegistery.makeInstance();
+        
+        registery.registerClass(Command1.class);
+        
+        registery.registerClass(Command2.class);
+        
+        registery.registerClass(Command3.class);
+        
+        new CommandFactory(registery).makeCommand("help").execute();
     }
 
 }

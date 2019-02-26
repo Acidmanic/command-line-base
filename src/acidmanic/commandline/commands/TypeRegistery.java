@@ -21,10 +21,11 @@ public class TypeRegistery implements ITypeRegistery {
     public TypeRegistery() {
         allCommandClasses = new ArrayList<>();
         commandsExistance = new HashSet<>();
+        registerClass(HelpCommand.class);
     }
 
     @Override
-    public void registerClass(Class refType) {
+    public final void registerClass(Class refType) {
         registerClass(refType.getName());
     }
 
@@ -37,7 +38,7 @@ public class TypeRegistery implements ITypeRegistery {
     }
 
     protected void putAllNames() {
-        registerClass(ICommand.class.getName());
+        registerClass(Command.class.getName());
         registerClass(CommandBase.class.getName());
         registerClass(BatchCommandBase.class.getName());
         registerClass(HelpCommand.class.getName());

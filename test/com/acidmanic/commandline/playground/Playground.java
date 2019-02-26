@@ -23,6 +23,7 @@ public class Playground {
             registerClass(Command1.class);
             registerClass(Command2.class);
             registerClass(Command3.class);
+            registerClass(Command4.class);
         
         }
         
@@ -38,7 +39,15 @@ public class Playground {
         ExecutionEnvironment environment = new ExecutionEnvironment(
             new TestTypeRegistery());
         
-        environment.execute("Command1 argument1 argument2");
+        environment.execute(new String[]{"Command1","Command2","Command4","Argument1"});
+        
+        System.out.println("---------------------------");
+        
+        environment.execute(new String[]{"help"});
+        
+        System.out.println("---------------------------");
+        
+        environment.execute(new String[]{"Command4","help"});
     }
     
 }

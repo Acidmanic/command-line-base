@@ -5,12 +5,12 @@
  */
 package acidmanic.commandline.application;
 
-import acidmanic.commandline.commands.ApplicationWideCommandFactory;
 import acidmanic.commandline.commands.ApplicationWideTypeRegistery;
 import acidmanic.commandline.commands.CommandFactory;
-import acidmanic.commandline.commands.ICommand;
-import acidmanic.commandline.commands.ICommandFactory;
 import acidmanic.commandline.commands.ITypeRegistery;
+import acidmanic.commandline.commands.Command;
+import acidmanic.commandline.commands.CommandSequenceParser;
+import java.util.List;
 
 /**
  *
@@ -73,23 +73,20 @@ public class ExecutionEnvironment {
     
     public void execute(String[] args){
         
-        ICommandFactory factory = new CommandFactory(this.typeRegistery);
+        CommandFactory factory = new CommandFactory(this.typeRegistery);
         
-        ICommand command = factory.makeCommand(args);
+        CommandSequenceParser parser = new CommandSequenceParser(factory);
         
-        command.execute();
+        List<Command> commands = parser.parse(args);
+        
+        for(Command c:commands){
+            
+            c.setExecutionEnvironment(this);
+            
+            c.execute();
+        }
     }
     
-    
-    public void execute(String args){
-        ICommandFactory factory = new CommandFactory(this.typeRegistery);
-        
-        ICommand command = factory.makeCommand(args);
-        
-        command.execute();
-    }
-    
-    
-    
+  
     
 }

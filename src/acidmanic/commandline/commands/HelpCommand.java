@@ -11,7 +11,8 @@ public class HelpCommand extends CommandBase {
     @Override
     public void execute() {
         HelpGenerator generator
-                = new HelpGenerator(ApplicationWideTypeRegistery.makeInstance());
+                = new HelpGenerator(this.creatorFactory.getTypeRegistery());
+        
         Console.Write(generator.generateHelp());
         Console.WriteLine("");
     }

@@ -1,10 +1,17 @@
 package acidmanic.commandline.commands;
 
-abstract public class CommandBase implements ICommand {
+import acidmanic.commandline.application.ExecutionEnvironment;
+import acidmanic.commandline.utility.ArgumentValidationResult;
+
+abstract public class CommandBase implements Command {
 
     protected String[] args = new String[]{};
-    protected ICommandFactory creatorFactory;
-
+    protected CommandFactory creatorFactory;
+    private ExecutionEnvironment executionEnvironment;
+    
+    
+    
+    
     protected abstract String getUsageString();
 
     protected Boolean noArguments() {
@@ -12,12 +19,12 @@ abstract public class CommandBase implements ICommand {
     }
 
     @Override
-    public void setCreatorFactory(ICommandFactory factory) {
+    public void setCreatorFactory(CommandFactory factory) {
         this.creatorFactory = factory;
     }
 
     @Override
-    public ICommandFactory getCreatorFactory() {
+    public CommandFactory getCreatorFactory() {
         return this.creatorFactory;
     }
 
@@ -127,7 +134,22 @@ abstract public class CommandBase implements ICommand {
         return false;
     }
     
-    
+    @Override
+    public ArgumentValidationResult validateArguments(){
+        return new ArgumentValidationResult(0);
+    }
+
+    @Override
+    public ExecutionEnvironment getExecutionEnvironment() {
+        return executionEnvironment;
+    }
+
+    @Override
+    public void setExecutionEnvironment(ExecutionEnvironment executionEnvironment) {
+        this.executionEnvironment = executionEnvironment;
+    }
     
 
+    
+    
 }
