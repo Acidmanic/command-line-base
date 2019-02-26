@@ -27,12 +27,13 @@ public class ExecutionEnvironment {
 
     private boolean helpExecuted;
     
+    private int numberOfExecutedCommands;
+    
     public ExecutionEnvironment() {
         
         this.dataRepository = new ExecutionDataRepository();
         
         this.typeRegistery = ApplicationWideTypeRegistery.makeInstance();
-        
     }
     
     
@@ -85,6 +86,8 @@ public class ExecutionEnvironment {
         
         commands = filterHelp(commands);
         
+        this.numberOfExecutedCommands = commands.size();
+        
         for(Command c:commands){
             
             c.setExecutionEnvironment(this);
@@ -114,9 +117,10 @@ public class ExecutionEnvironment {
     public boolean isHelpExecuted() {
         return helpExecuted;
     }
-    
-    
-    
+
+    public int getNumberOfExecutedCommands() {
+        return numberOfExecutedCommands;
+    }
   
     
 }

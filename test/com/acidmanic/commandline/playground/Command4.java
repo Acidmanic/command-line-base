@@ -42,7 +42,9 @@ public class Command4 extends CommandBase{
         
         environment.execute(args);
         
-        System.out.println("Command4 is executed");
+        if (!environment.isHelpExecuted()){
+            System.out.println("Command4 is executed");
+        }
         
     }
 
