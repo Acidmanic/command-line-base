@@ -2,6 +2,9 @@ package acidmanic.commandline.commands;
 
 import acidmanic.commandline.application.ExecutionEnvironment;
 import acidmanic.commandline.utility.ArgumentValidationResult;
+import com.acidmanic.consoletools.terminal.Terminal;
+import com.acidmanic.consoletools.terminal.styling.TerminalStyle;
+import com.acidmanic.consoletools.terminal.styling.TerminalStyles;
 
 abstract public class CommandBase implements Command {
 
@@ -84,24 +87,36 @@ abstract public class CommandBase implements Command {
      */
     protected boolean argumentCheck(int numberOfArguments) {
         if (noArguments(numberOfArguments)) {
-            argumentError();
+            usageError();
             return true;
         }
         return false;
     }
 
     protected void log(String text) {
+        Terminal t = new Terminal();
+        t.resetScreenAttributes();
         System.out.println(text);
     }
 
-    protected void argumentError() {
-        log("Argument error. usage:\n" + declareArguments());
+    protected void usageError() {
+        error("Argument error. usage:\n" + declareArguments()+ "\n" +
+                this.getName() + this.declareArguments()+"\n"+
+                this.getUsageString());
     }
 
     protected void error(String message) {
-        log(message);
-        log(this.getName() + this.declareArguments());
-        log(this.getUsageString());
+        Terminal t = new Terminal();
+        t.setScreenAttributes(TerminalStyles.Error);
+        System.out.println(message);
+        t.resetScreenAttributes();
+    }
+    
+    protected void warning(String message) {
+        Terminal t = new Terminal();
+        t.setScreenAttributes(TerminalStyles.Warning);
+        System.out.println(message);
+        t.resetScreenAttributes();
     }
 
     /**
