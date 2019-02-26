@@ -26,9 +26,7 @@ public interface Command {
     CommandFactory getCreatorFactory();
 
     boolean isVisible();
-    
-    boolean isHelp();
-    
+        
     ArgumentValidationResult validateArguments();
     
     void setExecutionEnvironment(ExecutionEnvironment executionEnvironment);

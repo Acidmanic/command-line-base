@@ -26,12 +26,6 @@ public class HelpCommand extends CommandBase {
     protected String getUsageString() {
         return "Prints this help.";
     }
-
-    @Override
-    public boolean isHelp() {
-        return true;
-    }
-    
     
 
 }

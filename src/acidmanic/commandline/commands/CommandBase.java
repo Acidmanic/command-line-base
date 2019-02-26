@@ -129,10 +129,6 @@ abstract public class CommandBase implements Command {
         return ret;
     }
 
-    @Override
-    public boolean isHelp() {
-        return false;
-    }
     
     @Override
     public ArgumentValidationResult validateArguments(){
