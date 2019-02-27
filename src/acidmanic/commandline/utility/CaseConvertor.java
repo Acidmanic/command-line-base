@@ -23,9 +23,10 @@ public class CaseConvertor {
         
         for(char c : chars){
             int currentCase = Character.isLowerCase(c)?0:1;
+            c = Character.toLowerCase(c);
+            
             if (lastCase<currentCase){
-                sb.append("-");
-                c = Character.toLowerCase(c);
+                sb.append("-");    
             }
             sb.append(c);
             lastCase = currentCase;
