@@ -1,6 +1,8 @@
 package acidmanic.commandline.commands;
 
 import acidmanic.commandline.application.ExecutionEnvironment;
+import acidmanic.commandline.commandnames.ClassNameNameGenerator;
+import acidmanic.commandline.commandnames.CommandNameGenerator;
 import acidmanic.commandline.utility.ArgumentValidationResult;
 import com.acidmanic.consoletools.terminal.Terminal;
 import com.acidmanic.consoletools.terminal.styling.TerminalStyles;
@@ -10,12 +12,22 @@ abstract public class CommandBase implements Command {
     protected String[] args = new String[]{};
     protected CommandFactory creatorFactory;
     private ExecutionEnvironment executionEnvironment;
-    
+    private CommandNameGenerator nameGenerator;
     
     
     
     protected abstract String getUsageString();
 
+    public CommandBase() {
+        this.nameGenerator = new ClassNameNameGenerator(this.getClass());
+    }
+
+    protected void setNameGenerator(CommandNameGenerator generator){
+        this.nameGenerator = generator;
+    }
+    
+    
+    
     protected final Boolean noArguments() {
         return noArguments(1);
     }
@@ -70,7 +82,7 @@ abstract public class CommandBase implements Command {
 
     @Override
     public String getName() {
-        return this.getClass().getSimpleName();
+        return this.nameGenerator.generateName();
     }
 
     @Override
@@ -158,8 +170,6 @@ abstract public class CommandBase implements Command {
     public void setExecutionEnvironment(ExecutionEnvironment executionEnvironment) {
         this.executionEnvironment = executionEnvironment;
     }
-    
-
     
     
 }
