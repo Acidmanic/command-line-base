@@ -5,6 +5,7 @@
  */
 package com.acidmanic.commandline.playground;
 
+import acidmanic.commandline.commandnames.DoubleDashedSnakeCaseNameGenerator;
 import acidmanic.commandline.commands.CommandBase;
 
 /**
@@ -13,6 +14,14 @@ import acidmanic.commandline.commands.CommandBase;
  */
 public class Argument1 extends CommandBase {
 
+    public Argument1() {
+        setNameGenerator(new DoubleDashedSnakeCaseNameGenerator(this.getClass()));
+    
+    }
+
+    
+    
+    
     @Override
     protected String getUsageString() {
         return "This is a dummy usage string";

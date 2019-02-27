@@ -22,7 +22,7 @@ public class CaseConvertor {
         int lastCase = 1;
         
         for(char c : chars){
-            int currentCase = Character.isLowerCase(c)?0:1;
+            int currentCase = Character.isUpperCase(c)?1:0;
             c = Character.toLowerCase(c);
             
             if (lastCase<currentCase){

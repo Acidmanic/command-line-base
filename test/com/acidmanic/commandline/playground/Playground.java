@@ -39,7 +39,7 @@ public class Playground {
         ExecutionEnvironment environment = new ExecutionEnvironment(
             new TestTypeRegistery());
         
-        environment.execute(new String[]{"Command1","Command2","Command4","Argument1"});
+        environment.execute(new String[]{"Command1","Command2","Command4","--argument1"});
         
         System.out.println("---------------------------");
         
@@ -48,6 +48,10 @@ public class Playground {
         System.out.println("---------------------------");
         
         environment.execute(new String[]{"Command4","help"});
+        
+        System.out.println("---------------------------");
+        
+        environment.execute(new String[]{"Command4","--argument1"});
     }
     
 }

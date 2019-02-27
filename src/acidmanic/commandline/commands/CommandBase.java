@@ -22,7 +22,7 @@ abstract public class CommandBase implements Command {
         this.nameGenerator = new ClassNameNameGenerator(this.getClass());
     }
 
-    protected void setNameGenerator(CommandNameGenerator generator){
+    protected final void setNameGenerator(CommandNameGenerator generator){
         this.nameGenerator = generator;
     }
     
