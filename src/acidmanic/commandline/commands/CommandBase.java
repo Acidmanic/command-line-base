@@ -172,4 +172,22 @@ abstract public class CommandBase implements Command {
     }
     
     
+    protected ArgumentValidationResult enoughOrNothing(int argumentCount){
+        if (args.length >=argumentCount){
+            return new ArgumentValidationResult(argumentCount);
+        }
+        return new ArgumentValidationResult(0);
+    }
+    
+    protected ArgumentValidationResult anyAvailable(int maximumNeeded){
+        if (args.length < maximumNeeded){
+            return new ArgumentValidationResult(args.length);
+        }
+        return new ArgumentValidationResult(maximumNeeded);
+    }
+    
+    protected ArgumentValidationResult anyAvailable(){
+        return new ArgumentValidationResult(args.length);
+    }
+    
 }
