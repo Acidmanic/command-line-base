@@ -3,7 +3,6 @@ package acidmanic.commandline.commands;
 import acidmanic.commandline.application.ExecutionEnvironment;
 import acidmanic.commandline.utility.ArgumentValidationResult;
 import com.acidmanic.consoletools.terminal.Terminal;
-import com.acidmanic.consoletools.terminal.styling.TerminalStyle;
 import com.acidmanic.consoletools.terminal.styling.TerminalStyles;
 
 abstract public class CommandBase implements Command {
@@ -17,7 +16,7 @@ abstract public class CommandBase implements Command {
     
     protected abstract String getUsageString();
 
-    protected Boolean noArguments() {
+    protected final Boolean noArguments() {
         return noArguments(1);
     }
 
@@ -31,11 +30,11 @@ abstract public class CommandBase implements Command {
         return this.creatorFactory;
     }
 
-    protected Boolean noArguments(int numberOfArgumentsNeeded) {
+    protected final Boolean noArguments(int numberOfArgumentsNeeded) {
         return (args == null || args.length < numberOfArgumentsNeeded);
     }
 
-    protected int getArgsCount() {
+    protected final int getArgsCount() {
         if (args == null || args.length == 0) {
             return 0;
         }
@@ -151,7 +150,7 @@ abstract public class CommandBase implements Command {
     }
 
     @Override
-    public ExecutionEnvironment getExecutionEnvironment() {
+    public final ExecutionEnvironment getExecutionEnvironment() {
         return executionEnvironment;
     }
 
