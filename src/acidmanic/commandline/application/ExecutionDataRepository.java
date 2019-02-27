@@ -29,6 +29,9 @@ public class ExecutionDataRepository {
     }
     
     public <T> void set(Object key,T value){
+        if(this.data.containsKey(key)){
+            this.data.remove(key);
+        }
         this.data.put(key, value);
     }
     
