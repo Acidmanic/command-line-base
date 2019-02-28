@@ -129,6 +129,13 @@ abstract public class CommandBase implements Command {
         System.out.println(message);
         t.resetScreenAttributes();
     }
+    
+    protected void info(String message){
+        Terminal t = new Terminal();
+        t.setScreenAttributes(TerminalStyles.BlueInput);
+        System.out.println(message);
+        t.resetScreenAttributes();
+    }
 
     /**
      *

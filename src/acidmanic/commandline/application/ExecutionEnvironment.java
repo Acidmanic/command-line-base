@@ -27,6 +27,8 @@ public class ExecutionEnvironment {
 
     private boolean helpExecuted;
     
+    private int exitCode;
+    
     private int numberOfExecutedCommands;
     
     public ExecutionEnvironment() {
@@ -34,6 +36,8 @@ public class ExecutionEnvironment {
         this.dataRepository = new ExecutionDataRepository();
         
         this.typeRegistery = ApplicationWideTypeRegistery.makeInstance();
+        
+        this.exitCode =0;
     }
     
     
@@ -121,6 +125,14 @@ public class ExecutionEnvironment {
     public int getNumberOfExecutedCommands() {
         return numberOfExecutedCommands;
     }
-  
+
+    public int getExitCode() {
+        return exitCode;
+    }
+
+    public void setExitCode(int exitCode) {
+        this.exitCode = exitCode;
+    }
+
     
 }
