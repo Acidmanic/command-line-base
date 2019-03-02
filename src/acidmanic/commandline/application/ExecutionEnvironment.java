@@ -10,7 +10,7 @@ import acidmanic.commandline.commands.CommandFactory;
 import acidmanic.commandline.commands.ITypeRegistery;
 import acidmanic.commandline.commands.Command;
 import acidmanic.commandline.commands.CommandSequenceParser;
-import acidmanic.commandline.commands.HelpCommand;
+import acidmanic.commandline.commands.Help;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,7 +98,7 @@ public class ExecutionEnvironment {
             
             c.execute();
             
-            if(c instanceof HelpCommand){
+            if(c instanceof Help){
                 this.helpExecuted = true;
             }
         }
@@ -108,7 +108,7 @@ public class ExecutionEnvironment {
         ArrayList<Command> ret = new ArrayList<>();
         
         for(Command c :commands){
-            if(c instanceof HelpCommand){
+            if(c instanceof Help){
                 ArrayList<Command> help = new ArrayList<>();
                 help.add(c);
                 return help;

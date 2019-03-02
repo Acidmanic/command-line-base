@@ -7,10 +7,11 @@ import acidmanic.commandline.application.Console;
 import acidmanic.commandline.commandnames.DoubleDashedSnakeCaseNameGenerator;
 import acidmanic.commandline.utility.HelpGenerator;
 
-public class HelpCommand extends CommandBase {
+public class Help extends CommandBase {
 
-    public HelpCommand() {
-        this.setNameGenerator(new DoubleDashedSnakeCaseNameGenerator(HelpCommand.class));
+    public Help() {
+        this.setNameGenerator(new DoubleDashedSnakeCaseNameGenerator(Help.class));
+  
     }
 
     
@@ -23,11 +24,6 @@ public class HelpCommand extends CommandBase {
         
         Console.Write(generator.generateHelp());
         Console.WriteLine("");
-    }
-
-    @Override
-    public String getName() {
-        return "Help";
     }
 
     @Override

@@ -21,7 +21,8 @@ public class TypeRegistery implements ITypeRegistery {
     public TypeRegistery() {
         allCommandClasses = new ArrayList<>();
         commandsExistance = new HashSet<>();
-        registerClass(HelpCommand.class);
+        registerClass(Help.class);
+        registerClass(Version.class);
     }
 
     @Override
@@ -41,7 +42,7 @@ public class TypeRegistery implements ITypeRegistery {
         registerClass(Command.class.getName());
         registerClass(CommandBase.class.getName());
         registerClass(BatchCommandBase.class.getName());
-        registerClass(HelpCommand.class.getName());
+        registerClass(Help.class.getName());
     }
 
     protected Class[] getAllInterfacesEver(Class cls) {

@@ -32,7 +32,7 @@ public class HelpGeneratorTest {
         
         registery.registerClass(Command3.class);
         
-        new CommandFactory(registery).makeCommand("help").execute();
+        new CommandFactory(registery).makeCommand("--help").execute();
     }
 
 }
