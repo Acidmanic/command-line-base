@@ -4,10 +4,18 @@
 package acidmanic.commandline.commands;
 
 import acidmanic.commandline.application.Console;
+import acidmanic.commandline.commandnames.DoubleDashedSnakeCaseNameGenerator;
 import acidmanic.commandline.utility.HelpGenerator;
 
 public class HelpCommand extends CommandBase {
 
+    public HelpCommand() {
+        this.setNameGenerator(new DoubleDashedSnakeCaseNameGenerator(HelpCommand.class));
+    }
+
+    
+    
+    
     @Override
     public void execute() {
         HelpGenerator generator
