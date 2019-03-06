@@ -6,6 +6,7 @@
 package com.acidmanic.commandline.playground;
 
 import acidmanic.commandline.application.ExecutionEnvironment;
+import acidmanic.commandline.application.ExecutionEnvironmentBuilder;
 import acidmanic.commandline.commands.TypeRegistery;
 
 /**
@@ -36,8 +37,8 @@ public class Playground {
      */
     public static void main(String[] args) {
         
-        ExecutionEnvironment environment = new ExecutionEnvironment(
-            new TestTypeRegistery());
+        ExecutionEnvironment environment = new ExecutionEnvironmentBuilder()
+                .withRegistery(new TestTypeRegistery()).build();
         
         environment.execute(new String[]{"Command1","Command2","Command4","--argument1"});
         

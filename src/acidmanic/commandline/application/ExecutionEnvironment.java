@@ -9,7 +9,6 @@ import acidmanic.commandline.commands.ApplicationWideTypeRegistery;
 import acidmanic.commandline.commands.CommandFactory;
 import acidmanic.commandline.commands.ITypeRegistery;
 import acidmanic.commandline.commands.Command;
-import acidmanic.commandline.commands.CommandBase;
 import acidmanic.commandline.commands.CommandSequenceParser;
 import acidmanic.commandline.commands.Help;
 import java.util.ArrayList;
@@ -32,8 +31,8 @@ public class ExecutionEnvironment {
     
     private int numberOfExecutedCommands;
     
+        
     
-    private Command parentExecuter;
     
     public ExecutionEnvironment() {
         
@@ -42,29 +41,41 @@ public class ExecutionEnvironment {
         this.typeRegistery = ApplicationWideTypeRegistery.makeInstance();
         
         this.exitCode =0;
-    }
-    
-    
-
-    public ExecutionEnvironment(ExecutionDataRepository dataRepository) {
         
-        this.dataRepository = dataRepository;
+        CommandStack.push(null);
         
-        this.typeRegistery = ApplicationWideTypeRegistery.makeInstance();
     }
 
     public ExecutionEnvironment(ITypeRegistery typeRegistery) {
+        this.dataRepository = new ExecutionDataRepository();
         
         this.typeRegistery = typeRegistery;
         
-        this.dataRepository = new ExecutionDataRepository();
+        this.exitCode =0;
+        
+        CommandStack.push(null);
     }
+    
+    public ExecutionEnvironment(ITypeRegistery typeRegistery,Command parentExecuter) {
+        this.dataRepository = new ExecutionDataRepository();
+        
+        this.typeRegistery = typeRegistery;
+        
+        this.exitCode =0;
+        
+        CommandStack.push(parentExecuter);
+    }
+    
+    
 
-    public ExecutionEnvironment(ExecutionDataRepository dataRepository, ITypeRegistery typeRegistery) {
+    public ExecutionEnvironment(ExecutionDataRepository dataRepository, ITypeRegistery typeRegistery,
+            Command parentExecuter) {
         
         this.dataRepository = dataRepository;
     
         this.typeRegistery = typeRegistery;
+        
+        CommandStack.push(parentExecuter);
     }
 
     public ExecutionDataRepository getDataRepository() {
@@ -83,15 +94,9 @@ public class ExecutionEnvironment {
         this.typeRegistery = typeRegistery;
     }
     
+    
     public void execute(String[] args){
-        execute(args,Command.NULLCOMMAND);
-    }
-    
-    
-    public void execute(String[] args,Command parentExecuter){
-        
-        this.parentExecuter = parentExecuter;
-        
+                
         CommandFactory factory = new CommandFactory(this.typeRegistery);
         
         CommandSequenceParser parser = new CommandSequenceParser(factory);
@@ -113,6 +118,16 @@ public class ExecutionEnvironment {
             }
         }
     }
+
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            CommandStack.pop();
+        } finally {
+            super.finalize();
+        }
+    }
+    
     
     
 
@@ -145,12 +160,5 @@ public class ExecutionEnvironment {
     public void setExitCode(int exitCode) {
         this.exitCode = exitCode;
     }
-
-    public Command getParentExecuter() {
-        return parentExecuter;
-    }
-
-    
-    
     
 }

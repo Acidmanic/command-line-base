@@ -6,6 +6,7 @@
 package com.acidmanic.commandline.playground;
 
 import acidmanic.commandline.application.ExecutionEnvironment;
+import acidmanic.commandline.application.ExecutionEnvironmentBuilder;
 import acidmanic.commandline.commands.CommandBase;
 import acidmanic.commandline.commands.TypeRegistery;
 import acidmanic.commandline.utility.ArgumentValidationResult;
@@ -37,8 +38,8 @@ public class Command4 extends CommandBase{
     @Override
     public void execute() {
         
-        ExecutionEnvironment environment 
-                = new ExecutionEnvironment(new NestedTypeRegistery());
+        ExecutionEnvironment environment = new ExecutionEnvironmentBuilder()
+                .withRegistery(new NestedTypeRegistery()).build();
         
         environment.execute(args);
         
