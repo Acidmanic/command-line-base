@@ -9,6 +9,7 @@ import acidmanic.commandline.commands.ApplicationWideTypeRegistery;
 import acidmanic.commandline.commands.CommandFactory;
 import acidmanic.commandline.commands.ITypeRegistery;
 import acidmanic.commandline.commands.Command;
+import acidmanic.commandline.commands.CommandBase;
 import acidmanic.commandline.commands.CommandSequenceParser;
 import acidmanic.commandline.commands.Help;
 import java.util.ArrayList;
@@ -30,6 +31,9 @@ public class ExecutionEnvironment {
     private int exitCode;
     
     private int numberOfExecutedCommands;
+    
+    
+    private Command parentExecuter;
     
     public ExecutionEnvironment() {
         
@@ -79,8 +83,14 @@ public class ExecutionEnvironment {
         this.typeRegistery = typeRegistery;
     }
     
-    
     public void execute(String[] args){
+        execute(args,Command.NULLCOMMAND);
+    }
+    
+    
+    public void execute(String[] args,Command parentExecuter){
+        
+        this.parentExecuter = parentExecuter;
         
         CommandFactory factory = new CommandFactory(this.typeRegistery);
         
@@ -103,6 +113,8 @@ public class ExecutionEnvironment {
             }
         }
     }
+    
+    
 
     private List<Command> filterHelp(List<Command> commands) {
         ArrayList<Command> ret = new ArrayList<>();
@@ -134,5 +146,11 @@ public class ExecutionEnvironment {
         this.exitCode = exitCode;
     }
 
+    public Command getParentExecuter() {
+        return parentExecuter;
+    }
+
+    
+    
     
 }

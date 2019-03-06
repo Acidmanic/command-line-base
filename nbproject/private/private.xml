@@ -2,10 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/diego/Projects/command-line-base/src/acidmanic/commandline/commands/TypeRegistery.java</file>
-            <file>file:/home/diego/Projects/command-line-base/src/acidmanic/commandline/commands/Version.java</file>
-            <file>file:/home/diego/Projects/command-line-base/test/com/acidmanic/commandline/playground/HelpGeneratorTest.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
