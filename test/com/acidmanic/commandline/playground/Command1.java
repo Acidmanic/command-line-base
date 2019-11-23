@@ -5,7 +5,7 @@
  */
 package com.acidmanic.commandline.playground;
 
-import acidmanic.commandline.commands.CommandBase;
+import com.acidmanic.commandline.commands.CommandBase;
 
 /**
  *
