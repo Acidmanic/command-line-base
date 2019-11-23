@@ -7,7 +7,9 @@ import acidmanic.commandline.commands.parameters.Parameter;
 import acidmanic.commandline.commands.parameters.ParameterBuilder;
 import acidmanic.commandline.utility.ArgumentValidationResult;
 
+import java.security.KeyStore.ProtectionParameter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.acidmanic.consoletools.terminal.Terminal;
@@ -19,8 +21,7 @@ abstract public class CommandBase implements Command {
     protected CommandFactory creatorFactory;
     private ExecutionEnvironment executionEnvironment;
     private CommandNameGenerator nameGenerator;
-    protected Parameter<?>[] params = new Parameter<?>[]{};
-    
+    private HashMap<String,Parameter<?>> params;
     
     protected abstract String getUsageString();
 
@@ -76,7 +77,7 @@ abstract public class CommandBase implements Command {
     protected String argumentsDesciption() {
         StringBuilder sb = new StringBuilder();
 
-        for(Parameter<?> param : this.params){
+        for(Parameter<?> param : this.params.values()){
             String name = param.getName();
             if(!param.isMandatory()){
                 name ="[" + name + "]";
@@ -97,7 +98,15 @@ abstract public class CommandBase implements Command {
 
         this.defineParameters(builder);
 
-        this.params = builder.build();
+        Parameter<?>[] result = builder.build();
+        
+        for(Parameter<?> param : result){
+            this.params.put(param.getName(), param);
+        }
+    }
+
+    protected HashMap<String,Parameter<?>> getParameters(){
+        return this.params;
     }
 
     @Override
