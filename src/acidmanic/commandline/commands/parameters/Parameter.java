@@ -1,4 +1,4 @@
-package acidmanic.commandline.commands;
+package acidmanic.commandline.commands.parameters;
 
 public interface Parameter<T> {
 
