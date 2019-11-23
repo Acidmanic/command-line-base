@@ -36,7 +36,7 @@ abstract public class CommandBase implements Command {
      * Here you can add some parameters using the builder. it will be called before execution.
      * @param params
      */
-    protected void addParameters(ParameterBuilder builder){
+    protected void defineParameters(ParameterBuilder builder){
 
     }
     
@@ -73,7 +73,7 @@ abstract public class CommandBase implements Command {
      *
      * @return
      */
-    protected String declareArguments() {
+    protected String argumentsDesciption() {
         StringBuilder sb = new StringBuilder();
 
         for(Parameter<?> param : this.params){
@@ -95,14 +95,14 @@ abstract public class CommandBase implements Command {
 
         ParameterBuilder builder = new ParameterBuilder();
 
-        this.addParameters(builder);
+        this.defineParameters(builder);
 
         this.params = builder.build();
     }
 
     @Override
     public String getdescription() {
-        String argsdec = declareArguments().trim();
+        String argsdec = argumentsDesciption().trim();
         String sep = "\n";
         if (argsdec == null || argsdec.length() == 0) {
             sep = "";
@@ -142,8 +142,8 @@ abstract public class CommandBase implements Command {
     }
 
     protected void usageError() {
-        error("Argument error. usage:\n" + declareArguments()+ "\n" +
-                this.getName() + this.declareArguments()+"\n"+
+        error("Argument error. usage:\n" + argumentsDesciption()+ "\n" +
+                this.getName() + this.argumentsDesciption()+"\n"+
                 this.getUsageString());
     }
 
