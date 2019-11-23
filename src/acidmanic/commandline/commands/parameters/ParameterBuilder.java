@@ -1,8 +1,9 @@
 package acidmanic.commandline.commands.parameters;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class ParameterBuilder {
-
 
 
     private String name;
@@ -10,6 +11,8 @@ public class ParameterBuilder {
     private Class<?> type;
     private boolean isMandatory;
     private int index;
+
+    private List<Parameter<?>> params = new ArrayList<>();
 
     public ParameterBuilder named(String name){
 
@@ -55,7 +58,7 @@ public class ParameterBuilder {
         return this;
     }
 
-    public <T> Parameter<T> build(){
+    private <T> Parameter<T> getCurrent(){
         
         ParameterBase<T> ret;
 
@@ -68,5 +71,25 @@ public class ParameterBuilder {
         ret.setDescription(this.description);
 
         return ret;
+    }
+
+
+    public <T> ParameterBuilder newParam(int index){
+
+        Parameter<T> current = getCurrent();
+
+        this.params.add(current);
+
+        return this;
+    }
+
+    public Parameter<?>[] build(){
+        
+        Parameter<?>[] ret = new Parameter<?>[this.params.size()];
+        
+        this.params.toArray(ret);
+
+        return ret;
+        
     }
 }

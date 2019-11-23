@@ -9,9 +9,12 @@ public interface Parameter<T> {
 
     String getDescription();
 
+    String getName();
+
     T getValue();
 
     boolean hasValue();
 
+    boolean isMandatory();
 
 }

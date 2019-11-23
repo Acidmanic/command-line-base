@@ -3,7 +3,13 @@ package acidmanic.commandline.commands;
 import acidmanic.commandline.application.ExecutionEnvironment;
 import acidmanic.commandline.commandnames.ClassNameNameGenerator;
 import acidmanic.commandline.commandnames.CommandNameGenerator;
+import acidmanic.commandline.commands.parameters.Parameter;
+import acidmanic.commandline.commands.parameters.ParameterBuilder;
 import acidmanic.commandline.utility.ArgumentValidationResult;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.acidmanic.consoletools.terminal.Terminal;
 import com.acidmanic.consoletools.terminal.styling.TerminalStyles;
 
@@ -13,7 +19,7 @@ abstract public class CommandBase implements Command {
     protected CommandFactory creatorFactory;
     private ExecutionEnvironment executionEnvironment;
     private CommandNameGenerator nameGenerator;
-    
+    protected Parameter<?>[] params = new Parameter<?>[]{};
     
     
     protected abstract String getUsageString();
@@ -26,6 +32,13 @@ abstract public class CommandBase implements Command {
         this.nameGenerator = generator;
     }
     
+    /***
+     * Here you can add some parameters using the builder. it will be called before execution.
+     * @param params
+     */
+    protected void addParameters(ParameterBuilder builder){
+
+    }
     
     
     protected final Boolean noArguments() {
@@ -61,12 +74,30 @@ abstract public class CommandBase implements Command {
      * @return
      */
     protected String declareArguments() {
-        return "";
+        StringBuilder sb = new StringBuilder();
+
+        for(Parameter<?> param : this.params){
+            String name = param.getName();
+            if(!param.isMandatory()){
+                name ="[" + name + "]";
+            }
+
+            sb.append('\n').append('\t').append(name).append('\t')
+            .append(param.getDescription());
+        }
+
+        return sb.toString();
     }
 
     @Override
     public void setArguments(String[] args) {
         this.args = args;
+
+        ParameterBuilder builder = new ParameterBuilder();
+
+        this.addParameters(builder);
+
+        this.params = builder.build();
     }
 
     @Override

@@ -30,6 +30,11 @@ public class MandatoryParameter<T> extends ParameterBase<T>{
         }
     }
 
+    @Override
+    public boolean isMandatory() {
+        return true;
+    }
+
    
 
    

@@ -10,6 +10,8 @@ public abstract class ParameterBase<T> implements Parameter<T>{
     private String description;
     private Class<T> type;
 
+
+    @Override
     public String getName() {
         return name;
     }
@@ -59,6 +61,4 @@ public abstract class ParameterBase<T> implements Parameter<T>{
         this.type = type;
     }
 
-
-    
 }

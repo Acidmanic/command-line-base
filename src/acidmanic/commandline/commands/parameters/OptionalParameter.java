@@ -24,4 +24,9 @@ public class OptionalParameter<T> extends ParameterBase<T> {
         }
     }
 
+    @Override
+    public boolean isMandatory() {
+        return false;
+    }
+
 }
