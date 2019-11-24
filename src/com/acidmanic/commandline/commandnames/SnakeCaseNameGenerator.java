@@ -5,25 +5,22 @@
  */
 package com.acidmanic.commandline.commandnames;
 
-import com.acidmanic.commandline.commands.Command;
 import com.acidmanic.commandline.utility.CaseConvertor;
 
 /**
  *
  * @author Mani Moayedi (acidmanic.moayedi@gmail.com)
  */
-public class SnakeCaseNameGenerator extends ClassNameNameGenerator{
+public class SnakeCaseNameGenerator extends NamegeneratorComposite{
 
-    public SnakeCaseNameGenerator(Class<? extends Command> type) {
-        super(type);
+   
+
+    public SnakeCaseNameGenerator(NameGenerator inner) {
+        super(inner);
     }
-
     @Override
-    public String generateName() {
-        
-        String className = super.generateName();
-        
-        return new CaseConvertor().pascalToSnake(className);
+    protected String generateNameBasedOn(String innerName) {
+        return new CaseConvertor().pascalToSnake(innerName);
     }
 
     

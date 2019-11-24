@@ -9,7 +9,7 @@ package com.acidmanic.commandline.commandnames;
  *
  * @author Mani Moayedi (acidmanic.moayedi@gmail.com)
  */
-public class FixedStringNameGenerator implements CommandNameGenerator{
+public class FixedStringNameGenerator implements NameGenerator{
 
    
     private final String value;
