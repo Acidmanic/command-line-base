@@ -30,7 +30,7 @@ public class HelpGenerator {
             try {
                 Command command = (Command) commandClass.newInstance();
                 if (command.isVisible()) {
-                    this.helps.put(command.getName(), command.getdescription());
+                    this.helps.put(command.getName(), command.getDescription());
                 }
             } catch (Exception e) {
             }

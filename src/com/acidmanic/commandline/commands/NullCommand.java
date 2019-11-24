@@ -19,7 +19,7 @@ public class NullCommand extends CommandBase {
     }
 
     @Override
-    public String getdescription() {
+    public String getDescription() {
         return "No Such Command!";
     }
 

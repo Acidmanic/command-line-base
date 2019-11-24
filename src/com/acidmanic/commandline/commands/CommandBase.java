@@ -120,7 +120,7 @@ abstract public class CommandBase implements Command {
     }
 
     @Override
-    public String getdescription() {
+    public String getDescription() {
         String argsdec = argumentsDesciption().trim();
         String sep = "\n";
         if (argsdec == null || argsdec.length() == 0) {

@@ -17,7 +17,7 @@ public interface Command {
 
     void setArguments(String[] args);
 
-    String getdescription();
+    String getDescription();
 
     String getName();
 
