@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import com.acidmanic.commandline.application.ExecutionEnvironment;
 import com.acidmanic.commandline.commandnames.ClassNameNameGenerator;
-import com.acidmanic.commandline.commandnames.CommandNameGenerator;
+import com.acidmanic.commandline.commandnames.NameGenerator;
 import com.acidmanic.commandline.commands.parameters.Parameter;
 import com.acidmanic.commandline.commands.parameters.ParameterBuilder;
 import com.acidmanic.commandline.utility.ArgumentValidationResult;
@@ -18,7 +18,7 @@ abstract public class CommandBase implements Command {
     protected String[] args = new String[]{};
     protected CommandFactory creatorFactory;
     private ExecutionEnvironment executionEnvironment;
-    private CommandNameGenerator nameGenerator;
+    private NameGenerator nameGenerator;
     private HashMap<String,Parameter<?>> params = new HashMap<>();
     
     protected abstract String getUsageString();
@@ -29,7 +29,7 @@ abstract public class CommandBase implements Command {
         setupParameters();
     }
 
-    protected final void setNameGenerator(CommandNameGenerator generator){
+    protected final void setNameGenerator(NameGenerator generator){
         this.nameGenerator = generator;
     }
     

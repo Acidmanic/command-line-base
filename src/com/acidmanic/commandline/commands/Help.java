@@ -4,13 +4,14 @@
 package com.acidmanic.commandline.commands;
 
 import com.acidmanic.commandline.application.Console;
-import com.acidmanic.commandline.commandnames.DoubleDashedSnakeCaseNameGenerator;
+import com.acidmanic.commandline.commandnames.DoubleDashedNameGenerator;
+import com.acidmanic.commandline.commandnames.NameGeneratorBuilder;
 import com.acidmanic.commandline.utility.HelpGenerator;
 
 public class Help extends CommandBase {
 
     public Help() {
-        this.setNameGenerator(new DoubleDashedSnakeCaseNameGenerator(Help.class));
+        this.setNameGenerator(NameGeneratorBuilder.makeDoubleDashedSnakecaseClassnameNameGenerator(Help.class));
   
     }
 

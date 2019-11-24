@@ -1,23 +1,24 @@
 package com.acidmanic.commandline.commands.parameters;
 
+import com.acidmanic.commandline.commandnames.NameGenerator;
+import com.acidmanic.commandline.commandnames.FixedStringNameGenerator;
 
 public abstract class ParameterBase<T> implements Parameter<T>{
 
 
-    private String name;
     private T value;
     private boolean hasValue;
     private String description;
     private Class<T> type;
-
+    private NameGenerator nameGenerator;
 
     @Override
     public String getName() {
-        return name;
+        return this.nameGenerator.generateName();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.nameGenerator = new FixedStringNameGenerator(name);
     }
 
 
@@ -39,10 +40,10 @@ public abstract class ParameterBase<T> implements Parameter<T>{
     }
 
     public ParameterBase(String name,Class<T> type) {
-        this.name = name;
         this.hasValue = false;
         this.value = null;
         this.type = type;
+        this.nameGenerator = new FixedStringNameGenerator(name);
     }
 
     public String getDescription() {
@@ -60,5 +61,15 @@ public abstract class ParameterBase<T> implements Parameter<T>{
     public void setType(Class<T> type) {
         this.type = type;
     }
+
+    public NameGenerator getNameGenerator() {
+        return nameGenerator;
+    }
+
+    public void setNameGenerator(NameGenerator nameGenerator) {
+        this.nameGenerator = nameGenerator;
+    }
+
+    
 
 }

@@ -5,7 +5,9 @@
  */
 package com.acidmanic.commandline.commands;
 
-import com.acidmanic.commandline.commandnames.DoubleDashedSnakeCaseNameGenerator;
+import com.acidmanic.commandline.commandnames.DoubleDashedNameGenerator;
+import com.acidmanic.commandline.commandnames.NameGeneratorBuilder;
+
 import java.io.File;
 import java.security.CodeSource;
 import java.util.jar.Attributes;
@@ -24,7 +26,7 @@ public class Version extends CommandBase{
     private final static String ATTR_TAG_START="Application-";
 
     public Version() {
-        this.setNameGenerator(new DoubleDashedSnakeCaseNameGenerator(Version.class));
+        this.setNameGenerator(NameGeneratorBuilder.makeDoubleDashedSnakecaseClassnameNameGenerator(Version.class));
     }
 
     @Override

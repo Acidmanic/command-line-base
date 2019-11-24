@@ -5,17 +5,15 @@
  */
 package com.acidmanic.commandline.commandnames;
 
-import com.acidmanic.commandline.commands.Command;
-
 /**
  *
  * @author Mani Moayedi (acidmanic.moayedi@gmail.com)
  */
-public class ClassNameNameGenerator implements CommandNameGenerator{
+public class ClassNameNameGenerator implements NameGenerator{
     
-    private final Class<? extends Command> type;
+    private final Class<?> type;
 
-    public ClassNameNameGenerator(Class<? extends Command> type) {
+    public ClassNameNameGenerator(Class<?> type) {
         this.type = type;
     }
     
