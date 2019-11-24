@@ -3,8 +3,20 @@ package com.acidmanic.commandline.commands.parameters;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.acidmanic.commandline.commandnames.DashedNameGenerator;
+import com.acidmanic.commandline.commandnames.DoubleDashedNameGenerator;
+import com.acidmanic.commandline.commandnames.FixedStringNameGenerator;
+import com.acidmanic.commandline.commandnames.NameGenerator;
+import com.acidmanic.commandline.commandnames.SnakeCaseNameGenerator;
+
 public class ParameterBuilder {
 
+
+
+    public static final int NAMEGENERATOR_SIMPLE =0;
+    public static final int NAMEGENERATOR_SNAKECASE =1;
+    public static final int NAMEGENERATOR_DASHED_SNAKECASE =2;
+    public static final int NAMEGENERATOR_DOUBLE_DASHED_SNAKECASE =3;
 
     private String name;
     private String description;
@@ -12,7 +24,7 @@ public class ParameterBuilder {
     private boolean isMandatory;
     private int index;
     private boolean touched ;
-
+    private int namegeneratorType=NAMEGENERATOR_SIMPLE;
 
     private List<Parameter<?>> params = new ArrayList<>();
 
@@ -77,11 +89,33 @@ public class ParameterBuilder {
 
         ret.setDescription(this.description);
 
+        NameGenerator gen = getNameGenerator();
+
+        ret.setNameGenerator(gen);
+
         return ret;
     }
 
 
-    public <T> ParameterBuilder newParam(){
+    private NameGenerator getNameGenerator() {
+        NameGenerator gen = new FixedStringNameGenerator(this.name);
+
+        if(this.namegeneratorType == NAMEGENERATOR_SNAKECASE){
+            return new SnakeCaseNameGenerator(gen);
+        }
+
+        if(this.namegeneratorType == NAMEGENERATOR_DASHED_SNAKECASE){
+            return new DashedNameGenerator(new SnakeCaseNameGenerator(gen));
+        }
+
+        if(this.namegeneratorType == NAMEGENERATOR_DOUBLE_DASHED_SNAKECASE){
+            return new DoubleDashedNameGenerator(new SnakeCaseNameGenerator(gen));
+        }
+
+        return gen;
+    }
+
+    public <T> ParameterBuilder newParam() {
 
         if(this.touched){
             Parameter<T> current = getCurrent();
