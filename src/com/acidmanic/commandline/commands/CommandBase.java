@@ -77,20 +77,46 @@ abstract public class CommandBase implements Command {
     protected String argumentsDesciption() {
         StringBuilder sb = new StringBuilder();
 
-        for(Parameter<?> param : this.params.values()){
-            String name = param.getName();
-            if(!param.isMandatory()){
-                name ="[" + name + "]";
-            }
+        appendCommandCall(sb,this.params);
 
-            sb.append('\n').append('\t').append(name).append('\t')
-            .append(param.getDescription());
-        }
+        appendParameterDescriptions(sb,this.params);
+        
 
         return sb.toString();
     }
 
-    protected <T> T getParameterValue(String parameterName){
+    private void appendParameterDescriptions(StringBuilder sb, HashMap<String, Parameter<?>> params) {
+        
+        for(Parameter<?> param : params.values()){
+            String name = param.getName();
+            sb.append('\n').append('\t').append(name).append('\t')
+            .append(param.getDescription());
+        }
+    }
+
+    private StringBuilder appendCommandCall(StringBuilder sb, HashMap<String, Parameter<?>> params) {
+
+        String mandatories = "";
+        String optionals ="";
+        boolean anyOptional = false;
+        for(Parameter<?> param : params.values()){
+            if(param.isMandatory()){
+                mandatories += "<"+param.getName()+"> ";
+            }else{
+                anyOptional = true;
+                optionals += " <" + param.getName() + ">";
+            }
+        }
+
+        sb.append(mandatories);
+
+        if(anyOptional){
+            sb.append("[").append(optionals).append(" ]");
+        }
+        return sb;
+    }
+
+    protected <T> T getParameterValue(String parameterName) {
         if(this.params.containsKey(parameterName)){
             return (T) this.params.get(parameterName).getValue();
         }
