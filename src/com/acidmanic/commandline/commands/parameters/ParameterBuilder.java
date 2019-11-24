@@ -18,6 +18,7 @@ public class ParameterBuilder {
 
     public ParameterBuilder() {
         this.clear();
+        this.params = new ArrayList<>();
     }
 
     public ParameterBuilder named(String name){
@@ -97,7 +98,6 @@ public class ParameterBuilder {
         this.index =0;
         this.isMandatory = false;
         this.name = "";
-        this.params = new ArrayList<>();
         this.type = String.class;
         this.touched = false;
     }
@@ -108,7 +108,6 @@ public class ParameterBuilder {
         if(this.touched){
             newParam();
 
-            this.clear();
         }
 
         Parameter<?>[] ret = new Parameter<?>[this.params.size()];

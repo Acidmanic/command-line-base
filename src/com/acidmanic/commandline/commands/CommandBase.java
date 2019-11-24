@@ -119,10 +119,6 @@ abstract public class CommandBase implements Command {
         }
     }
 
-    protected HashMap<String,Parameter<?>> getParameters(){
-        return this.params;
-    }
-
     @Override
     public String getdescription() {
         String argsdec = argumentsDesciption().trim();
