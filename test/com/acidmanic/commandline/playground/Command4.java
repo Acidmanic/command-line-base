@@ -9,6 +9,7 @@ import com.acidmanic.commandline.application.ExecutionEnvironment;
 import com.acidmanic.commandline.application.ExecutionEnvironmentBuilder;
 import com.acidmanic.commandline.commands.CommandBase;
 import com.acidmanic.commandline.commands.TypeRegistery;
+import com.acidmanic.commandline.commands.parameters.ParameterBuilder;
 import com.acidmanic.commandline.utility.ArgumentValidationResult;
 
 /**
@@ -27,6 +28,17 @@ public class Command4 extends CommandBase{
         
     
     }
+
+    @Override
+    protected void defineParameters(ParameterBuilder builder) {
+        builder.named("intparam").described("Just pass an integer").indexAt(0)
+                .mandatory().ofType(int.class)
+                .newParam().named("TheString").described("String parameter")
+                .optional().ofType(String.class);
+    }
+    
+ 
+    
     
     
     @Override
@@ -46,6 +58,18 @@ public class Command4 extends CommandBase{
         if (!environment.isHelpExecuted()){
             System.out.println("Command4 is executed");
         }
+        
+        info("getting integer parameter:");
+        
+        int value = this.getParameterValue("intparam");
+        
+        info("and ofcourse the value is: "+ value);
+        
+        info("getting string parameter:");
+        
+        String sparam = this.getParameterValue("TheString");
+        
+        info("and ofcourse the value is: "+ sparam);
         
     }
 

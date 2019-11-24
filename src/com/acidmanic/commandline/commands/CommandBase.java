@@ -131,6 +131,8 @@ abstract public class CommandBase implements Command {
     @Override
     public void setArguments(String[] args) {
         this.args = args;
+        
+        fillupParameters();
     }
 
     private void setupParameters() {
@@ -271,6 +273,12 @@ abstract public class CommandBase implements Command {
     
     protected ArgumentValidationResult anyAvailable(){
         return new ArgumentValidationResult(args.length);
+    }
+
+    private void fillupParameters() {
+        for(Parameter<?> param : this.params.values()){
+            param.parse(args);
+        }
     }
     
 }
