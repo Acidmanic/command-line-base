@@ -19,12 +19,14 @@ abstract public class CommandBase implements Command {
     protected CommandFactory creatorFactory;
     private ExecutionEnvironment executionEnvironment;
     private CommandNameGenerator nameGenerator;
-    private HashMap<String,Parameter<?>> params;
+    private HashMap<String,Parameter<?>> params = new HashMap<>();
     
     protected abstract String getUsageString();
 
     public CommandBase() {
         this.nameGenerator = new ClassNameNameGenerator(this.getClass());
+
+        setupParameters();
     }
 
     protected final void setNameGenerator(CommandNameGenerator generator){
@@ -103,14 +105,16 @@ abstract public class CommandBase implements Command {
     @Override
     public void setArguments(String[] args) {
         this.args = args;
+    }
 
+    private void setupParameters() {
         ParameterBuilder builder = new ParameterBuilder();
 
         this.defineParameters(builder);
 
         Parameter<?>[] result = builder.build();
-        
-        for(Parameter<?> param : result){
+
+        for (Parameter<?> param : result) {
             this.params.put(param.getName(), param);
         }
     }
