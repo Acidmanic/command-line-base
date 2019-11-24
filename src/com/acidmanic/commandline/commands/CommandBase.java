@@ -1,5 +1,7 @@
 package com.acidmanic.commandline.commands;
 
+import java.util.HashMap;
+
 import com.acidmanic.commandline.application.ExecutionEnvironment;
 import com.acidmanic.commandline.commandnames.ClassNameNameGenerator;
 import com.acidmanic.commandline.commandnames.CommandNameGenerator;
@@ -7,10 +9,6 @@ import com.acidmanic.commandline.commands.parameters.Parameter;
 import com.acidmanic.commandline.commands.parameters.ParameterBuilder;
 import com.acidmanic.commandline.utility.ArgumentValidationResult;
 
-import java.security.KeyStore.ProtectionParameter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import com.acidmanic.consoletools.terminal.Terminal;
 import com.acidmanic.consoletools.terminal.styling.TerminalStyles;
@@ -88,6 +86,18 @@ abstract public class CommandBase implements Command {
         }
 
         return sb.toString();
+    }
+
+    protected <T> T getParameterValue(String parameterName){
+        if(this.params.containsKey(parameterName)){
+            return (T) this.params.get(parameterName).getValue();
+        }
+
+        return null;
+    }
+
+    protected boolean isParameterProvided(String parameterName){
+        return this.params.containsKey(parameterName);
     }
 
     @Override
