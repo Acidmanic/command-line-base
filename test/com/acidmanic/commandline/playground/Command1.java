@@ -29,7 +29,8 @@ public class Command1 extends CommandBase {
 
     @Override
     protected void defineParameters(ParameterBuilder builder) {
-        builder.named("param1").described("cool parameter").ofType(String.class).mandatory();
+        builder.named("param1").described("cool parameter").ofType(String.class).mandatory()
+        .newParam().named("param2").described("This is an optional parameter").ofType(String.class).optional();
     }
     
     
