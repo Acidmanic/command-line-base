@@ -1,5 +1,8 @@
 package com.acidmanic.commandline.commands.parameters;
 
+import com.acidmanic.commandline.argumentparsing.ArgumentProperties;
+import com.acidmanic.commandline.argumentparsing.ArgumentReadingStrategy;
+import com.acidmanic.commandline.argumentparsing.FixedIndexStrategy;
 import com.acidmanic.commandline.utility.PrimaryConvertor;
 
 public class MandatoryParameter<T> extends ParameterBase<T>{
@@ -15,24 +18,19 @@ public class MandatoryParameter<T> extends ParameterBase<T>{
          
     }
 
-
-    @Override
-    public void parse(String[] args) {
-
-        if(args.length > this.index){
-
-            T value = PrimaryConvertor.convert(args[this.index], this.getType());
-
-            if(value != null){
-                this.setValue(value);
-            }
-            
-        }
-    }
-
     @Override
     public boolean isMandatory() {
         return true;
+    }
+
+    @Override
+    protected ArgumentReadingStrategy getReadingStrategy() {
+        return new FixedIndexStrategy();
+    }
+
+    @Override
+    protected ArgumentProperties getArgumentProperties() {
+        return new ArgumentProperties(this.getName(),this.index);
     }
 
    

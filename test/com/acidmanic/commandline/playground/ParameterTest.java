@@ -21,6 +21,6 @@ public class ParameterTest {
         
         ExecutionEnvironment env = new ExecutionEnvironment();
         
-        env.execute(new String[]{"command4","213","TheString=ImATestString"});
+        env.execute(new String[]{"command4","213","TheString","ImATestString"});
     }
 }
