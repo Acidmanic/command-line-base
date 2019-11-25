@@ -5,9 +5,9 @@
  */
 package com.acidmanic.commandline.playground;
 
-import acidmanic.commandline.application.ExecutionEnvironment;
-import acidmanic.commandline.application.ExecutionEnvironmentBuilder;
-import acidmanic.commandline.commands.TypeRegistery;
+import com.acidmanic.commandline.application.ExecutionEnvironment;
+import com.acidmanic.commandline.application.ExecutionEnvironmentBuilder;
+import com.acidmanic.commandline.commands.TypeRegistery;
 
 /**
  *

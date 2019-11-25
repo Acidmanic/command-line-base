@@ -5,9 +5,9 @@
  */
 package com.acidmanic.commandline.playground;
 
-import acidmanic.commandline.commands.ApplicationWideTypeRegistery;
-import acidmanic.commandline.commands.CommandFactory;
-import acidmanic.commandline.commands.TypeRegistery;
+import com.acidmanic.commandline.commands.ApplicationWideTypeRegistery;
+import com.acidmanic.commandline.commands.CommandFactory;
+import com.acidmanic.commandline.commands.TypeRegistery;
 
 /**
  *

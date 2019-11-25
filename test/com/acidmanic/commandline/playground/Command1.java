@@ -5,7 +5,8 @@
  */
 package com.acidmanic.commandline.playground;
 
-import acidmanic.commandline.commands.CommandBase;
+import com.acidmanic.commandline.commands.CommandBase;
+import com.acidmanic.commandline.commands.parameters.ParameterBuilder;
 
 /**
  *
@@ -25,6 +26,12 @@ public class Command1 extends CommandBase {
                 + "happening any soon, maybe 100 chars is long enough. and can hold a long text to be seen.";
     }
 
+
+    @Override
+    protected void defineParameters(ParameterBuilder builder) {
+        builder.named("param1").described("cool parameter").ofType(String.class).mandatory()
+        .newParam().named("param2").described("This is an optional parameter").ofType(String.class).optional();
+    }
     
     
 }
