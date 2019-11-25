@@ -6,6 +6,12 @@ import com.acidmanic.consoletools.terminal.styling.TerminalStyles;
 public class ConsoleLogger {
 
 
+    protected void log(String text) {
+        Terminal t = new Terminal();
+        t.resetScreenAttributes();
+        System.out.println(text);
+    }
+
     protected void error(String message) {
         Terminal t = new Terminal();
         t.setScreenAttributes(TerminalStyles.Error);
