@@ -32,14 +32,13 @@ public class MandatoryParameter<T> extends ParameterBase<T>{
         return new ArgumentProperties(this.getName(),this.index);
     }
 
-   
-
-   
-
-    
-
-
-
-
+    @Override
+    public int compareOrderTo(Parameter<?> value) {
+        if(value instanceof MandatoryParameter){
+            return this.index - ((MandatoryParameter<T>) value).index;
+        }
+        
+        return super.compareOrderTo(value);
+    }
 
 }

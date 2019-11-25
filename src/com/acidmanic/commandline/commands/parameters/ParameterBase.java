@@ -100,4 +100,9 @@ public abstract class ParameterBase<T> implements Parameter<T>{
             
         } catch (Exception e) {}
     }
+    
+    @Override
+    public int compareOrderTo(Parameter<?> value) {
+        return this.getName().compareTo(value.getName());
+    }
 }
