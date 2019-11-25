@@ -52,7 +52,7 @@ public class ParameterDescriber  {
 
         if(anyOptional){
 
-            sb.append("[").append(optionals).append(" ]");
+            sb.append(" [").append(optionals).append(" ]");
         }
         
         return sb;
