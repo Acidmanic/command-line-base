@@ -1,7 +1,6 @@
 package com.acidmanic.commandline.commands.parameters;
-
 import com.acidmanic.commandline.commandnames.NameGenerator;
-import com.acidmanic.commandline.utility.PrimaryConvertor;
+import com.acidmanic.commandline.utility.Convert;
 import com.acidmanic.commandline.argumentparsing.ArgumentProperties;
 import com.acidmanic.commandline.argumentparsing.ArgumentReadingStrategy;
 import com.acidmanic.commandline.commandnames.FixedStringNameGenerator;
@@ -90,10 +89,10 @@ public abstract class ParameterBase<T> implements Parameter<T>{
 
 
         try {
-
+            
             String svalue = getReadingStrategy().read(getArgumentProperties(),args);
 
-            T value = PrimaryConvertor.convert(svalue, this.getType());
+            T value = Convert.convert(svalue, this.getType());
 
             if(value != null){
                 this.setValue(value);

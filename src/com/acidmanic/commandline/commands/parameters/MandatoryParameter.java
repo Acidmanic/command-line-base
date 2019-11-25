@@ -3,7 +3,6 @@ package com.acidmanic.commandline.commands.parameters;
 import com.acidmanic.commandline.argumentparsing.ArgumentProperties;
 import com.acidmanic.commandline.argumentparsing.ArgumentReadingStrategy;
 import com.acidmanic.commandline.argumentparsing.FixedIndexStrategy;
-import com.acidmanic.commandline.utility.PrimaryConvertor;
 
 public class MandatoryParameter<T> extends ParameterBase<T>{
 
