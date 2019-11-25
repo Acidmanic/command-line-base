@@ -1,6 +1,5 @@
 package com.acidmanic.commandline.commands.parameters;
 
-import com.acidmanic.commandline.argumentparsing.ArgumentReadingStrategy;
 
 public interface Parameter<T> {
 
@@ -20,5 +19,7 @@ public interface Parameter<T> {
     boolean hasValue();
 
     boolean isMandatory();
+    
+    int compareOrderTo(Parameter<?> value);
 
 }

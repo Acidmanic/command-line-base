@@ -3,15 +3,21 @@ package com.acidmanic.commandline.utility;
 import java.util.Collection;
 
 import com.acidmanic.commandline.commands.parameters.Parameter;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class ParameterDescriber  {
 
     public String describeParameters(Collection<Parameter<?>> params){
+        
+        Collection<Parameter<?>> sortedParams = sort(params);
+        
         StringBuilder sb = new StringBuilder();
 
-        appendCommandCall(sb,params);
+        appendCommandCall(sb,sortedParams);
 
-        appendParameterDescriptions(sb,params);
+        appendParameterDescriptions(sb,sortedParams);
         
         return sb.toString();
     }
@@ -33,7 +39,7 @@ public class ParameterDescriber  {
         String mandatories = "";
         String optionals ="";
         boolean anyOptional = false;
-
+        
         for(Parameter<?> param : params){
 
             if(param.isMandatory()){
@@ -52,9 +58,34 @@ public class ParameterDescriber  {
 
         if(anyOptional){
 
-            sb.append(" [").append(optionals.trim()).append(" ]");
+            sb.append(" [ ").append(optionals.trim()).append(" ]");
         }
         
         return sb;
     }
+
+    private Collection<Parameter<?>> sort(Collection<Parameter<?>> params) {
+        
+        List<Parameter<?>> sortedParams = new ArrayList<>();
+        
+        params.forEach(param -> sortedParams.add(param));
+        
+        sortedParams.sort((o1,o2) -> compare (o1,o2));
+        
+        return sortedParams;
+    }
+
+    private int compare(Parameter<?> o1, Parameter<?> o2) {
+        if(o1.isMandatory() && !o2.isMandatory()){
+            return 10;
+        }
+        
+        if(!o1.isMandatory() && o2.isMandatory()){
+            return -10;
+        }
+        
+        return o1.compareOrderTo(o2);
+    }
+    
+    
 }
