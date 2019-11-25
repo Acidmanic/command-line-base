@@ -48,6 +48,12 @@ public class ParameterBuilder {
         return this;
     }
 
+    /***
+     *  Will determine the the data type of the parameter.
+     *  
+     * @param type, Available types are primary types plus {@link java.io.File}, and {@link java.util.Date}
+     * @return
+     */
     public ParameterBuilder ofType(Class<?> type){
 
         this.type = type;
