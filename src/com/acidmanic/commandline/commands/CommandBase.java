@@ -145,19 +145,11 @@ abstract public class CommandBase extends ConsoleLogger implements Command {
         return false;
     }
 
-    protected void log(String text) {
-        Terminal t = new Terminal();
-        t.resetScreenAttributes();
-        System.out.println(text);
-    }
-
     protected void usageError() {
         error("Argument error. usage:\n" + argumentsDesciption()+ "\n" +
                 this.getName() + this.argumentsDesciption()+"\n"+
                 this.getUsageString());
     }
-
-    
 
     /**
      *
