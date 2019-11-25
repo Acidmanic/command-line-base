@@ -38,21 +38,21 @@ public class ParameterDescriber  {
 
             if(param.isMandatory()){
 
-                mandatories += param.describeProvision();
+                mandatories += param.describeProvision() + " ";
 
             }else{
 
                 anyOptional = true;
                 
-                optionals += param.describeProvision();
+                optionals += param.describeProvision() + " ";
             }
         }
 
-        sb.append(mandatories);
+        sb.append(mandatories.trim());
 
         if(anyOptional){
 
-            sb.append(" [").append(optionals).append(" ]");
+            sb.append(" [").append(optionals.trim()).append(" ]");
         }
         
         return sb;
