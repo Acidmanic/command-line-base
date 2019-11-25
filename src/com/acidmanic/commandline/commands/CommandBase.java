@@ -151,32 +151,6 @@ abstract public class CommandBase extends ConsoleLogger implements Command {
                 this.getUsageString());
     }
 
-    /**
-     *
-     * @return This function will concatenate all arguments together separating
-     * with a space.
-     */
-    protected String allArgsAsCommand() {
-        return allArgsAsCommand(0);
-    }
-
-    /**
-     *
-     * @param startIndex
-     * @return This function will concatenate all arguments, starting from (and
-     * including) <code>startIndex</code>.
-     */
-    protected String allArgsAsCommand(int startIndex) {
-        String ret = "";
-        String sep = "";
-        for (int i = startIndex; i < args.length; i++) {
-            ret += sep + args[i];
-            sep = " ";
-        }
-        return ret;
-    }
-
-    
     @Override
     public ArgumentValidationResult validateArguments(){
         return new ArgumentValidationResult(0);
