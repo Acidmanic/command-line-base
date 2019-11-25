@@ -8,12 +8,11 @@ import com.acidmanic.commandline.commandnames.NameGenerator;
 import com.acidmanic.commandline.commands.parameters.Parameter;
 import com.acidmanic.commandline.commands.parameters.ParameterBuilder;
 import com.acidmanic.commandline.utility.ArgumentValidationResult;
-
-
+import com.acidmanic.commandline.utility.ConsoleLogger;
+import com.acidmanic.commandline.utility.ParameterDescriber;
 import com.acidmanic.consoletools.terminal.Terminal;
-import com.acidmanic.consoletools.terminal.styling.TerminalStyles;
 
-abstract public class CommandBase implements Command {
+abstract public class CommandBase extends ConsoleLogger implements Command {
 
     protected String[] args = new String[]{};
     protected CommandFactory creatorFactory;
@@ -75,46 +74,10 @@ abstract public class CommandBase implements Command {
      * @return
      */
     protected String argumentsDesciption() {
-        StringBuilder sb = new StringBuilder();
-
-        appendCommandCall(sb,this.params);
-
-        appendParameterDescriptions(sb,this.params);
-        
-
-        return sb.toString();
+        return new ParameterDescriber().describeParameters(this.params.values());
     }
 
-    private void appendParameterDescriptions(StringBuilder sb, HashMap<String, Parameter<?>> params) {
-        
-        for(Parameter<?> param : params.values()){
-            String name = param.getName();
-            sb.append('\n').append('\t').append(name).append('\t')
-            .append(param.getDescription());
-        }
-    }
-
-    private StringBuilder appendCommandCall(StringBuilder sb, HashMap<String, Parameter<?>> params) {
-
-        String mandatories = "";
-        String optionals ="";
-        boolean anyOptional = false;
-        for(Parameter<?> param : params.values()){
-            if(param.isMandatory()){
-                mandatories += "<"+param.getName()+"> ";
-            }else{
-                anyOptional = true;
-                optionals += " <" + param.getName() + ">";
-            }
-        }
-
-        sb.append(mandatories);
-
-        if(anyOptional){
-            sb.append("[").append(optionals).append(" ]");
-        }
-        return sb;
-    }
+    
 
     protected <T> T getParameterValue(String parameterName) {
         if(this.params.containsKey(parameterName)){
@@ -194,26 +157,7 @@ abstract public class CommandBase implements Command {
                 this.getUsageString());
     }
 
-    protected void error(String message) {
-        Terminal t = new Terminal();
-        t.setScreenAttributes(TerminalStyles.Error);
-        System.out.println(message);
-        t.resetScreenAttributes();
-    }
     
-    protected void warning(String message) {
-        Terminal t = new Terminal();
-        t.setScreenAttributes(TerminalStyles.Warning);
-        System.out.println(message);
-        t.resetScreenAttributes();
-    }
-    
-    protected void info(String message){
-        Terminal t = new Terminal();
-        t.setScreenAttributes(TerminalStyles.BlueInput);
-        System.out.println(message);
-        t.resetScreenAttributes();
-    }
 
     /**
      *

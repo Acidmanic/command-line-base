@@ -76,6 +76,15 @@ public abstract class ParameterBase<T> implements Parameter<T>{
     protected abstract ArgumentReadingStrategy getReadingStrategy();
     protected abstract ArgumentProperties getArgumentProperties();
 
+
+    @Override
+    public String describeProvision() {
+        return getReadingStrategy()
+        .describeProvision(
+            getArgumentProperties()
+        );
+    }
+
     @Override
     public void parse(String[] args) {
 
