@@ -1,5 +1,7 @@
 package com.acidmanic.commandline.commands.parameters;
 
+import com.acidmanic.commandline.argumentparsing.ArgumentReadingStrategy;
+
 public interface Parameter<T> {
 
 
@@ -10,6 +12,8 @@ public interface Parameter<T> {
     String getDescription();
 
     String getName();
+
+    String describeProvision();
 
     T getValue();
 
