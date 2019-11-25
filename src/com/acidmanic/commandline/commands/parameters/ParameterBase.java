@@ -1,6 +1,9 @@
 package com.acidmanic.commandline.commands.parameters;
 
 import com.acidmanic.commandline.commandnames.NameGenerator;
+import com.acidmanic.commandline.utility.PrimaryConvertor;
+import com.acidmanic.commandline.argumentparsing.ArgumentProperties;
+import com.acidmanic.commandline.argumentparsing.ArgumentReadingStrategy;
 import com.acidmanic.commandline.commandnames.FixedStringNameGenerator;
 
 public abstract class ParameterBase<T> implements Parameter<T>{
@@ -70,6 +73,23 @@ public abstract class ParameterBase<T> implements Parameter<T>{
         this.nameGenerator = nameGenerator;
     }
 
-    
+    protected abstract ArgumentReadingStrategy getReadingStrategy();
+    protected abstract ArgumentProperties getArgumentProperties();
 
+    @Override
+    public void parse(String[] args) {
+
+
+        try {
+
+            String svalue = getReadingStrategy().read(getArgumentProperties(),args);
+
+            T value = PrimaryConvertor.convert(svalue, this.getType());
+
+            if(value != null){
+                this.setValue(value);
+            }
+            
+        } catch (Exception e) {}
+    }
 }

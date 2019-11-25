@@ -1,6 +1,8 @@
 package com.acidmanic.commandline.commands.parameters;
 
-import com.acidmanic.commandline.utility.PrimaryConvertor;
+import com.acidmanic.commandline.argumentparsing.ArgumentProperties;
+import com.acidmanic.commandline.argumentparsing.ArgumentReadingStrategy;
+import com.acidmanic.commandline.argumentparsing.NextToName;
 
 public class OptionalParameter<T> extends ParameterBase<T> {
 
@@ -9,24 +11,18 @@ public class OptionalParameter<T> extends ParameterBase<T> {
     }
 
     @Override
-    public void parse(String[] args) {
-
-        for(String arg:args){
-            if(arg.toLowerCase().startsWith(this.getName().toLowerCase()+"=")){
-                String svalue = arg.substring(this.getName().length()+1,arg.length());
-
-                T value = PrimaryConvertor.convert(svalue, this.getType());
-
-                if(value != null){
-                    this.setValue(value);
-                }
-            }
-        }
+    public boolean isMandatory() {
+        return false;
     }
 
     @Override
-    public boolean isMandatory() {
-        return false;
+    protected ArgumentReadingStrategy getReadingStrategy() {
+        return new NextToName();
+    }
+
+    @Override
+    protected ArgumentProperties getArgumentProperties() {
+        return new ArgumentProperties(this.getName(),-1);
     }
 
 }
