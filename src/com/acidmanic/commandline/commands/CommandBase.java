@@ -10,7 +10,6 @@ import com.acidmanic.commandline.commands.parameters.ParameterBuilder;
 import com.acidmanic.commandline.utility.ArgumentValidationResult;
 import com.acidmanic.commandline.utility.ConsoleLogger;
 import com.acidmanic.commandline.utility.ParameterDescriber;
-import com.acidmanic.consoletools.terminal.Terminal;
 
 abstract public class CommandBase extends ConsoleLogger implements Command {
 
@@ -88,7 +87,11 @@ abstract public class CommandBase extends ConsoleLogger implements Command {
     }
 
     protected boolean isParameterProvided(String parameterName){
-        return this.params.containsKey(parameterName);
+        if(this.params.containsKey(parameterName)){
+            return this.params.get(parameterName).hasValue();
+        }
+
+        return false;
     }
 
     @Override
@@ -112,13 +115,7 @@ abstract public class CommandBase extends ConsoleLogger implements Command {
 
     @Override
     public String getDescription() {
-        String argsdec = argumentsDesciption().trim();
-        String sep = "\n";
-        if (argsdec == null || argsdec.length() == 0) {
-            sep = "";
-            argsdec = "";
-        }
-        return argsdec + sep + getUsageString();
+        return getUsageString() + " \n" + argumentsDesciption().trim();
     }
 
     @Override
