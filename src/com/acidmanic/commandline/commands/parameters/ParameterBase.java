@@ -48,6 +48,7 @@ public abstract class ParameterBase<T> implements Parameter<T>{
         this.nameGenerator = new FixedStringNameGenerator(name);
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
