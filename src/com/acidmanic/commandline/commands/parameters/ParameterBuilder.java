@@ -8,6 +8,7 @@ import com.acidmanic.commandline.commandnames.DoubleDashedNameGenerator;
 import com.acidmanic.commandline.commandnames.FixedStringNameGenerator;
 import com.acidmanic.commandline.commandnames.NameGenerator;
 import com.acidmanic.commandline.commandnames.SnakeCaseNameGenerator;
+import com.acidmanic.commandline.utility.Convert;
 
 public class ParameterBuilder {
 
@@ -20,11 +21,12 @@ public class ParameterBuilder {
 
     private String name;
     private String description;
-    private Class<?> type;
+    private ParameterValueFactory factory;
     private boolean isMandatory;
     private int index;
     private boolean touched ;
     private int namegeneratorType=NAMEGENERATOR_SIMPLE;
+    
 
     private List<Parameter<?>> params = new ArrayList<>();
 
@@ -56,8 +58,17 @@ public class ParameterBuilder {
      */
     public ParameterBuilder ofType(Class<?> type){
 
-        this.type = type;
+        this.factory =  sValue -> Convert.convert(sValue, type);
         this.touched = true;
+        return this;
+    }
+    
+    
+    public ParameterBuilder withValueFactory(ParameterValueFactory factory){
+        this.factory = factory;
+        
+        this.touched = true;
+        
         return this;
     }
 

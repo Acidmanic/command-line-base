@@ -11,9 +11,9 @@ public abstract class ParameterBase<T> implements Parameter<T>{
     private T value;
     private boolean hasValue;
     private String description;
-    private Class<T> type;
     private NameGenerator nameGenerator;
-
+    private ParameterValueFactory<T> factory;
+    
     @Override
     public String getName() {
         return this.nameGenerator.generateName();
@@ -41,10 +41,20 @@ public abstract class ParameterBase<T> implements Parameter<T>{
         this.hasValue = true;
     }
 
+    public ParameterValueFactory<T> getFactory() {
+        return factory;
+    }
+
+    public void setFactory(ParameterValueFactory<T> factory) {
+        this.factory = factory;
+    }
+    
+    
+
     public ParameterBase(String name,Class<T> type) {
         this.hasValue = false;
         this.value = null;
-        this.type = type;
+        this.factory = sValue  -> Convert.convert(sValue, type);
         this.nameGenerator = new FixedStringNameGenerator(name);
     }
 
@@ -55,14 +65,6 @@ public abstract class ParameterBase<T> implements Parameter<T>{
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Class<T> getType() {
-        return type;
-    }
-
-    public void setType(Class<T> type) {
-        this.type = type;
     }
 
     public NameGenerator getNameGenerator() {
@@ -93,10 +95,10 @@ public abstract class ParameterBase<T> implements Parameter<T>{
             
             String svalue = getReadingStrategy().read(getArgumentProperties(),args);
 
-            T value = Convert.convert(svalue, this.getType());
+            T oValue = this.factory.convert(svalue);
 
-            if(value != null){
-                this.setValue(value);
+            if(oValue != null){
+                this.setValue(oValue);
             }
             
         } catch (Exception e) {}
