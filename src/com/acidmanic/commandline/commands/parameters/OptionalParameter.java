@@ -6,8 +6,8 @@ import com.acidmanic.commandline.argumentparsing.NextToName;
 
 public class OptionalParameter<T> extends ParameterBase<T> {
 
-    public OptionalParameter(String name, Class<T> type) {
-        super(name, type);
+    public OptionalParameter(String name) {
+        super(name);
     }
 
     @Override

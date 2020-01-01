@@ -51,10 +51,10 @@ public abstract class ParameterBase<T> implements Parameter<T>{
     
     
 
-    public ParameterBase(String name,Class<T> type) {
+    public ParameterBase(String name) {
         this.hasValue = false;
         this.value = null;
-        this.factory = sValue  -> Convert.convert(sValue, type);
+        this.factory = svalue  ->  (T)svalue;
         this.nameGenerator = new FixedStringNameGenerator(name);
     }
 

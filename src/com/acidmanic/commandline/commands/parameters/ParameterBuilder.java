@@ -99,9 +99,9 @@ public class ParameterBuilder {
         ParameterBase<T> ret;
 
         if(this.isMandatory){
-            ret = new MandatoryParameter<T>(this.name, this.index,(Class<T>)this.type);
+            ret = new MandatoryParameter<T>(this.name, this.index);
         }else{
-            ret= new OptionalParameter<T>(this.name, (Class<T>)this.type);
+            ret= new OptionalParameter<T>(this.name);
         }
 
         ret.setDescription(this.description);
@@ -149,7 +149,7 @@ public class ParameterBuilder {
         this.index =0;
         this.isMandatory = false;
         this.name = "";
-        this.type = String.class;
+        this.factory = s -> s;
         this.touched = false;
     }
 
