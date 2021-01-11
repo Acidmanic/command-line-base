@@ -7,39 +7,45 @@ import com.acidmanic.commandline.commandnames.ClassNameNameGenerator;
 import com.acidmanic.commandline.commandnames.NameGenerator;
 import com.acidmanic.commandline.commands.parameters.Parameter;
 import com.acidmanic.commandline.commands.parameters.ParameterBuilder;
+import com.acidmanic.commandline.logging.ConsoleLogger;
+import com.acidmanic.commandline.logging.Logger;
 import com.acidmanic.commandline.utility.ArgumentValidationResult;
-import com.acidmanic.commandline.utility.ConsoleLogger;
 import com.acidmanic.commandline.utility.ParameterDescriber;
 
-abstract public class CommandBase extends ConsoleLogger implements Command {
+abstract public class CommandBase implements Command {
 
     protected String[] args = new String[]{};
     protected CommandFactory creatorFactory;
     private ExecutionEnvironment executionEnvironment;
     private NameGenerator nameGenerator;
-    private HashMap<String,Parameter<?>> params = new HashMap<>();
-    
+    private HashMap<String, Parameter<?>> params = new HashMap<>();
+    private Logger logger;
+
     protected abstract String getUsageString();
 
     public CommandBase() {
         this.nameGenerator = new ClassNameNameGenerator(this.getClass());
 
         setupParameters();
+
+        this.logger = new ConsoleLogger();
     }
 
-    protected final void setNameGenerator(NameGenerator generator){
+    protected final void setNameGenerator(NameGenerator generator) {
         this.nameGenerator = generator;
     }
-    
-    /***
-     * Here you can add some parameters using the builder. it will be called before execution.
+
+    /**
+     * *
+     * Here you can add some parameters using the builder. it will be called
+     * before execution.
+     *
      * @param params
      */
-    protected void defineParameters(ParameterBuilder builder){
+    protected void defineParameters(ParameterBuilder builder) {
 
     }
-    
-    
+
     protected final Boolean noArguments() {
         return noArguments(1);
     }
@@ -76,18 +82,16 @@ abstract public class CommandBase extends ConsoleLogger implements Command {
         return new ParameterDescriber().describeParameters(this.params.values());
     }
 
-    
-
     protected <T> T getParameterValue(String parameterName) {
-        if(this.params.containsKey(parameterName)){
+        if (this.params.containsKey(parameterName)) {
             return (T) this.params.get(parameterName).getValue();
         }
 
         return null;
     }
 
-    protected boolean isParameterProvided(String parameterName){
-        if(this.params.containsKey(parameterName)){
+    protected boolean isParameterProvided(String parameterName) {
+        if (this.params.containsKey(parameterName)) {
             return this.params.get(parameterName).hasValue();
         }
 
@@ -97,7 +101,7 @@ abstract public class CommandBase extends ConsoleLogger implements Command {
     @Override
     public void setArguments(String[] args) {
         this.args = args;
-        
+
         fillupParameters();
     }
 
@@ -143,13 +147,13 @@ abstract public class CommandBase extends ConsoleLogger implements Command {
     }
 
     protected void usageError() {
-        error("Argument error. usage:\n" + argumentsDesciption()+ "\n" +
-                this.getName() + this.argumentsDesciption()+"\n"+
-                this.getUsageString());
+        error("Argument error. usage:\n" + argumentsDesciption() + "\n"
+                + this.getName() + this.argumentsDesciption() + "\n"
+                + this.getUsageString());
     }
 
     @Override
-    public ArgumentValidationResult validateArguments(){
+    public ArgumentValidationResult validateArguments() {
         return new ArgumentValidationResult(0);
     }
 
@@ -162,30 +166,49 @@ abstract public class CommandBase extends ConsoleLogger implements Command {
     public void setExecutionEnvironment(ExecutionEnvironment executionEnvironment) {
         this.executionEnvironment = executionEnvironment;
     }
-    
-    
-    protected ArgumentValidationResult enoughOrNothing(int argumentCount){
-        if (args.length >=argumentCount){
+
+    protected ArgumentValidationResult enoughOrNothing(int argumentCount) {
+        if (args.length >= argumentCount) {
             return new ArgumentValidationResult(argumentCount);
         }
         return new ArgumentValidationResult(0);
     }
-    
-    protected ArgumentValidationResult anyAvailable(int maximumNeeded){
-        if (args.length < maximumNeeded){
+
+    protected ArgumentValidationResult anyAvailable(int maximumNeeded) {
+        if (args.length < maximumNeeded) {
             return new ArgumentValidationResult(args.length);
         }
         return new ArgumentValidationResult(maximumNeeded);
     }
-    
-    protected ArgumentValidationResult anyAvailable(){
+
+    protected ArgumentValidationResult anyAvailable() {
         return new ArgumentValidationResult(args.length);
     }
 
     private void fillupParameters() {
-        for(Parameter<?> param : this.params.values()){
+        for (Parameter<?> param : this.params.values()) {
             param.parse(args);
         }
     }
-    
+
+    public void setLogger(Logger logger) {
+        this.logger = logger;
+    }
+
+    protected void error(String text) {
+        this.logger.error(text);
+    }
+
+    protected void warning(String text) {
+        this.logger.warning(text);
+    }
+
+    protected void info(String text) {
+        this.logger.info(text);
+    }
+
+    protected void log(String text) {
+        this.logger.log(text);
+    }
+
 }

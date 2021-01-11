@@ -1,32 +1,44 @@
-package com.acidmanic.commandline.utility;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.acidmanic.commandline.logging;
 
 import com.acidmanic.consoletools.terminal.Terminal;
 import com.acidmanic.consoletools.terminal.styling.TerminalStyles;
 
-public class ConsoleLogger {
-
-
-    protected void log(String text) {
+/**
+ *
+ * @author diego
+ */
+public class ConsoleLogger implements Logger {
+    
+    @Override
+    public void log(String text) {
         Terminal t = new Terminal();
         t.resetScreenAttributes();
         System.out.println(text);
     }
 
-    protected void error(String message) {
+    @Override
+    public void error(String message) {
         Terminal t = new Terminal();
         t.setScreenAttributes(TerminalStyles.Error);
         System.out.println(message);
         t.resetScreenAttributes();
     }
     
-    protected void warning(String message) {
+    @Override
+    public void warning(String message) {
         Terminal t = new Terminal();
         t.setScreenAttributes(TerminalStyles.Warning);
         System.out.println(message);
         t.resetScreenAttributes();
     }
     
-    protected void info(String message){
+    @Override
+    public void info(String message){
         Terminal t = new Terminal();
         t.setScreenAttributes(TerminalStyles.BlueInput);
         System.out.println(message);
