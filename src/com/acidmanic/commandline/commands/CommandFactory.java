@@ -1,20 +1,33 @@
-
 package com.acidmanic.commandline.commands;
 
+import com.acidmanic.commandline.logging.ConsoleLogger;
+import com.acidmanic.commandline.logging.Logger;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CommandFactory  {
+public class CommandFactory {
 
     private HashMap<String, Class> typeList = new HashMap<>();
     private final ITypeRegistery typeRegistery;
+    private final Logger logger;
 
     public CommandFactory(ITypeRegistery typeRegistery) {
+        this(typeRegistery, new ConsoleLogger());
+    }
+
+    public CommandFactory(ITypeRegistery typeRegistery, Logger logger) {
+
         this.typeRegistery = typeRegistery;
+
+        this.logger = logger;
+
         typeList = new HashMap<>();
+        
         ArrayList<Class> allClasses = typeRegistery.getApplicationClasses();
+        
         int fixedLength = 0;
+        
         for (Class t : allClasses) {
             int mod = t.getModifiers();
             if (!Modifier.isAbstract(mod)
@@ -60,12 +73,9 @@ public class CommandFactory  {
         return typeRegistery.isOfType(t, Command.class);
     }
 
-    
     public ITypeRegistery getTypeRegistery() {
         return typeRegistery;
     }
-    
-    
 
     private Command makeCommand(CommandLine commandLine) {
         Command ret;
@@ -74,15 +84,19 @@ public class CommandFactory  {
             Class t = typeList.get(cmd);
             try {
                 ret = (Command) t.newInstance();
+                
                 ret.setArguments(commandLine.getArgs());
+                
                 ret.setCreatorFactory(this);
+                
+                ret.setLogger(this.logger);
+                
                 return ret;
             } catch (Exception e) {
                 return Command.NULLCOMMAND;
             }
 
         }
-
         return Command.NULLCOMMAND;
     }
 

@@ -5,7 +5,7 @@
     <groupId>com.acidmanic</groupId>
     <artifactId>commandline-base</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.4</version>
     <name>commandline-tools</name>
     <url>https://github.com/Acidmanic/command-line-base</url>
     

@@ -4,12 +4,13 @@
 package com.acidmanic.commandline.commands;
 
 import com.acidmanic.commandline.application.ExecutionEnvironment;
+import com.acidmanic.commandline.logging.Logger;
 import com.acidmanic.commandline.utility.ArgumentValidationResult;
 
 public interface Command {
 
-    
     static final NullCommand NULLCOMMAND = new NullCommand();
+
     /**
      *
      */
@@ -26,11 +27,13 @@ public interface Command {
     CommandFactory getCreatorFactory();
 
     boolean isVisible();
-        
+
     ArgumentValidationResult validateArguments();
-    
+
     void setExecutionEnvironment(ExecutionEnvironment executionEnvironment);
-    
+
     ExecutionEnvironment getExecutionEnvironment();
-    
+
+    void setLogger(Logger logger);
+
 }
