@@ -3,11 +3,19 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.acidmanic</groupId>
-    <artifactId>command-line-base</artifactId>
+    <artifactId>commandline-base</artifactId>
     <packaging>jar</packaging>
     <version>1.0.2</version>
     <name>commandline-tools</name>
     <url>https://github.com/Acidmanic/command-line-base</url>
+    
+    <licenses>
+        <license>
+            <name>The MIT License</name>
+            <url>https://raw.githubusercontent.com/Acidmanic/command-line-base/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
