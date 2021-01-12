@@ -4,7 +4,6 @@
 
 package com.acidmanic.commandline.commands;
 
-import com.acidmanic.commandline.application.Console;
 import java.util.ArrayList;
 
 
@@ -31,7 +30,7 @@ abstract public class BatchCommandBase  extends CommandBase
             c = factory.makeCommand(command);
             c.execute();
         }
-        Console.WriteLine("Batch Command:" + this.getName() + " Executed Completely.");
+        log("Batch Command:" + this.getName() + " Executed Completely.");
     }
 
 }

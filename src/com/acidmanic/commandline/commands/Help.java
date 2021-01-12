@@ -3,8 +3,6 @@
 //
 package com.acidmanic.commandline.commands;
 
-import com.acidmanic.commandline.application.Console;
-import com.acidmanic.commandline.commandnames.DoubleDashedNameGenerator;
 import com.acidmanic.commandline.commandnames.NameGeneratorBuilder;
 import com.acidmanic.commandline.utility.HelpGenerator;
 
@@ -12,25 +10,22 @@ public class Help extends CommandBase {
 
     public Help() {
         this.setNameGenerator(NameGeneratorBuilder.makeDoubleDashedSnakecaseClassnameNameGenerator(Help.class));
-  
+
     }
 
-    
-    
-    
     @Override
     public void execute() {
         HelpGenerator generator
                 = new HelpGenerator(this.creatorFactory.getTypeRegistery());
-        
-        Console.Write(generator.generateHelp());
-        Console.WriteLine("");
+
+        String help = generator.generateHelp();
+
+        log(help);
     }
 
     @Override
     protected String getUsageString() {
         return "Prints this help.";
     }
-    
 
 }

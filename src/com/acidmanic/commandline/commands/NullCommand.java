@@ -5,8 +5,6 @@
  */
 package com.acidmanic.commandline.commands;
 
-import com.acidmanic.commandline.application.Console;
-
 /**
  *
  * @author Mani Moayedi (acidmanic.moayedi@gmail.com)
@@ -15,7 +13,7 @@ public class NullCommand extends CommandBase {
 
     @Override
     public void execute() {
-        Console.WriteLine("No Such Command!");
+        log("No Such Command!");
     }
 
     @Override
