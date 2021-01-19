@@ -8,11 +8,6 @@ import com.acidmanic.commandline.utility.HelpGenerator;
 
 public class Help extends CommandBase {
 
-    public Help() {
-        this.setNameGenerator(NameGeneratorBuilder.makeDoubleDashedSnakecaseClassnameNameGenerator(Help.class));
-
-    }
-
     @Override
     public void execute() {
         HelpGenerator generator

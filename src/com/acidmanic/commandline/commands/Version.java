@@ -5,15 +5,12 @@
  */
 package com.acidmanic.commandline.commands;
 
-import com.acidmanic.commandline.commandnames.NameGeneratorBuilder;
 
 import java.io.File;
 import java.security.CodeSource;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -23,10 +20,7 @@ public class Version extends CommandBase{
 
     private final static String ATTR_TAG_START="Application-";
 
-    public Version() {
-        this.setNameGenerator(NameGeneratorBuilder.makeDoubleDashedSnakecaseClassnameNameGenerator(Version.class));
-    }
-
+    
     @Override
     protected String getUsageString() {
         return "Prints the application version";

@@ -1,5 +1,8 @@
 package com.acidmanic.commandline.commands;
 
+import com.acidmanic.commandline.commandnames.ClassNameNameGenerator;
+import com.acidmanic.commandline.commandnames.NameGenerator;
+import com.acidmanic.commandline.commandnames.NameGeneratorBuilder;
 import com.acidmanic.lightweight.logger.ConsoleLogger;
 import com.acidmanic.lightweight.logger.Logger;
 import java.lang.reflect.Modifier;
@@ -11,23 +14,22 @@ public class CommandFactory {
     private HashMap<String, Class> typeList = new HashMap<>();
     private final ITypeRegistery typeRegistery;
     private final Logger logger;
+    private final NameGeneratorBuilder namegeneratorBuilder = new NameGeneratorBuilder();
 
     public CommandFactory(ITypeRegistery typeRegistery) {
         this(typeRegistery, new ConsoleLogger());
     }
 
     public CommandFactory(ITypeRegistery typeRegistery, Logger logger) {
-
         this.typeRegistery = typeRegistery;
-
         this.logger = logger;
 
         typeList = new HashMap<>();
-        
+
         ArrayList<Class> allClasses = typeRegistery.getApplicationClasses();
-        
+
         int fixedLength = 0;
-        
+
         for (Class t : allClasses) {
             int mod = t.getModifiers();
             if (!Modifier.isAbstract(mod)
@@ -43,6 +45,10 @@ public class CommandFactory {
                 }
             }
         }
+    }
+
+    public NameGeneratorBuilder setupNameGenerator() {
+        return this.namegeneratorBuilder;
     }
 
     private class CommandLine {
@@ -78,20 +84,29 @@ public class CommandFactory {
     }
 
     private Command makeCommand(CommandLine commandLine) {
-        Command ret;
-        String cmd = commandLine.getName().toLowerCase();
-        if (typeList.containsKey(cmd)) {
-            Class t = typeList.get(cmd);
+
+        String commandName = commandLine.getName().toLowerCase();
+
+        Command command;
+
+        if (typeList.containsKey(commandName)) {
+
+            Class commandType = typeList.get(commandName);
+
             try {
-                ret = (Command) t.newInstance();
-                
-                ret.setArguments(commandLine.getArgs());
-                
-                ret.setCreatorFactory(this);
-                
-                ret.setLogger(this.logger);
-                
-                return ret;
+                command = (Command) commandType.newInstance();
+
+                command.setArguments(commandLine.getArgs());
+
+                command.setCreatorFactory(this);
+
+                command.setLogger(this.logger);
+
+                NameGenerator generator = this.namegeneratorBuilder.build(commandType, commandName);
+
+                command.setNameGenerator(generator);
+
+                return command;
             } catch (Exception e) {
                 return Command.NULLCOMMAND;
             }

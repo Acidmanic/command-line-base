@@ -4,6 +4,7 @@
 package com.acidmanic.commandline.commands;
 
 import com.acidmanic.commandline.application.ExecutionEnvironment;
+import com.acidmanic.commandline.commandnames.NameGenerator;
 import com.acidmanic.commandline.utility.ArgumentValidationResult;
 import com.acidmanic.lightweight.logger.Logger;
 
@@ -35,5 +36,7 @@ public interface Command {
     ExecutionEnvironment getExecutionEnvironment();
 
     void setLogger(Logger logger);
+
+    void setNameGenerator(NameGenerator nameGenerator);
 
 }

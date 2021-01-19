@@ -31,15 +31,17 @@ abstract public class CommandBase implements Command {
         this.logger = new ConsoleLogger();
     }
 
-    protected final void setNameGenerator(NameGenerator generator) {
+    @Override
+    public final void setNameGenerator(NameGenerator generator) {
         this.nameGenerator = generator;
     }
 
     /**
      * *
-     * Here you can add some parameters using the builder. it will be called
-     * before execution.
+     * Here you can add some parameters using the builder.it will be called
+ before execution.
      *
+     * @param builder
      * @param params
      */
     protected void defineParameters(ParameterBuilder builder) {

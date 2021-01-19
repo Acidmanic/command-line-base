@@ -5,8 +5,10 @@
  */
 package com.acidmanic.commandline.playground;
 
+import com.acidmanic.commandline.commandnames.ClassNameNameGenerator;
 import com.acidmanic.commandline.commandnames.DoubleDashedNameGenerator;
 import com.acidmanic.commandline.commandnames.NameGeneratorBuilder;
+import com.acidmanic.commandline.commandnames.SnakeCaseNameGenerator;
 import com.acidmanic.commandline.commands.CommandBase;
 
 /**
@@ -16,13 +18,16 @@ import com.acidmanic.commandline.commands.CommandBase;
 public class Argument1 extends CommandBase {
 
     public Argument1() {
-        setNameGenerator(NameGeneratorBuilder.makeDoubleDashedSnakecaseClassnameNameGenerator(this.getClass()));
-    
+
+        setNameGenerator(
+                new NameGeneratorBuilder().seed(ClassNameNameGenerator.class)
+                        .wrapedIn(SnakeCaseNameGenerator.class)
+                        .wrapedIn(DoubleDashedNameGenerator.class)
+                        .build(Argument1.class, "")
+        );
+
     }
 
-    
-    
-    
     @Override
     protected String getUsageString() {
         return "This is a dummy usage string";
@@ -32,5 +37,5 @@ public class Argument1 extends CommandBase {
     public void execute() {
         System.out.println("Argument1 is executed");
     }
-    
+
 }
