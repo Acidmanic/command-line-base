@@ -5,7 +5,6 @@
  */
 package com.acidmanic.commandline.commands;
 
-import com.acidmanic.commandline.commandnames.DoubleDashedNameGenerator;
 import com.acidmanic.commandline.commandnames.NameGeneratorBuilder;
 
 import java.io.File;
@@ -15,7 +14,6 @@ import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.omg.CosNaming.NamingContextPackage.NotEmpty;
 
 /**
  *
@@ -77,11 +75,8 @@ public class Version extends CommandBase{
                     
                 }
                 
-                
-                
-                
             } catch (Exception ex) {
-                Logger.getLogger(Version.class.getName()).log(Level.SEVERE, null, ex);
+                warning("Version information is not provided within the application.");
             }
         }
     }
