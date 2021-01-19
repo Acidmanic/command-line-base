@@ -4,8 +4,8 @@
 package com.acidmanic.commandline.commands;
 
 import com.acidmanic.commandline.application.ExecutionEnvironment;
-import com.acidmanic.commandline.logging.Logger;
 import com.acidmanic.commandline.utility.ArgumentValidationResult;
+import com.acidmanic.lightweight.logger.Logger;
 
 public interface Command {
 

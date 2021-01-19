@@ -1,7 +1,7 @@
 package com.acidmanic.commandline.commands;
 
-import com.acidmanic.commandline.logging.ConsoleLogger;
-import com.acidmanic.commandline.logging.Logger;
+import com.acidmanic.lightweight.logger.ConsoleLogger;
+import com.acidmanic.lightweight.logger.Logger;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;

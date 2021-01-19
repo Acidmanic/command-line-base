@@ -113,6 +113,14 @@
             <version>1.0.0</version>
         </dependency>
         
+        <!-- https://mvnrepository.com/artifact/com.acidmanic/lightweight-logger -->
+        <dependency>
+            <groupId>com.acidmanic</groupId>
+            <artifactId>lightweight-logger</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        
     </dependencies>
 
 

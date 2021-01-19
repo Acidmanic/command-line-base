@@ -7,10 +7,10 @@ import com.acidmanic.commandline.commandnames.ClassNameNameGenerator;
 import com.acidmanic.commandline.commandnames.NameGenerator;
 import com.acidmanic.commandline.commands.parameters.Parameter;
 import com.acidmanic.commandline.commands.parameters.ParameterBuilder;
-import com.acidmanic.commandline.logging.ConsoleLogger;
-import com.acidmanic.commandline.logging.Logger;
 import com.acidmanic.commandline.utility.ArgumentValidationResult;
 import com.acidmanic.commandline.utility.ParameterDescriber;
+import com.acidmanic.lightweight.logger.ConsoleLogger;
+import com.acidmanic.lightweight.logger.Logger;
 
 abstract public class CommandBase implements Command {
 
