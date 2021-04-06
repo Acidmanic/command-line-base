@@ -3,6 +3,7 @@
 //
 package com.acidmanic.commandline.commands;
 
+import com.acidmanic.commandline.commands.context.ExecutionContext;
 import com.acidmanic.lightweight.logger.Logger;
 
 public interface Command {
@@ -31,5 +32,6 @@ public interface Command {
 
     void setLogger(Logger logger);
     
-    
+    void setContext(ExecutionContext context);
+        
 }

@@ -1,5 +1,6 @@
 package com.acidmanic.commandline.commands;
 
+import com.acidmanic.commandline.commands.context.ExecutionContext;
 import com.acidmanic.lightweight.logger.ConsoleLogger;
 import com.acidmanic.lightweight.logger.Logger;
 
@@ -7,6 +8,7 @@ public abstract class CommandBase implements Command {
 
     protected CommandFactory creatorFactory;
     private Logger logger;
+    private ExecutionContext context;
 
     /**
      * Describe what the command does.
@@ -61,6 +63,15 @@ public abstract class CommandBase implements Command {
         return description.replaceAll("\\n", "\n\t");
     }
 
+    @Override
+    public void setContext(ExecutionContext context) {
+        this.context = context;
+    }
+
+    protected <TContext> TContext getContext(){
+        return (TContext) context;
+    }
+    
     @Override
     public boolean isVisible() {
         return true;

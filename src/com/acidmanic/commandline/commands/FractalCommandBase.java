@@ -5,6 +5,7 @@
  */
 package com.acidmanic.commandline.commands;
 
+import com.acidmanic.commandline.commands.context.ExecutionContext;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @author diego
  */
-public abstract class FractalCommandBase extends CommandBase{
+public abstract class FractalCommandBase<TContext extends ExecutionContext> extends CommandBase{
 
     
     private final TypeRegistery subCommandsTypeRegistery;
@@ -45,17 +46,21 @@ public abstract class FractalCommandBase extends CommandBase{
     @Override
     public void execute(String[] args) {
         
-        CommandFactory factory = new CommandFactory(this.subCommandsTypeRegistery,this.getLogger());
+        TContext context = createNewContext();
+        
+        CommandFactory factory = new CommandFactory(this.subCommandsTypeRegistery,this.getLogger(),context);
         
         HashMap<Command,String[]> sublevels = factory.make(args, false);
         
         sublevels.forEach( (c,ar) -> c.execute(ar));
         
-        execute();
+        execute(context);
     }
     
     
-    protected abstract void execute();
+    protected abstract void execute(TContext subCommandsExecutionContext);
+    
+    protected abstract TContext createNewContext();
 
     @Override
     public boolean hasArguments() {
