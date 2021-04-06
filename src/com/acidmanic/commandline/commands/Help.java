@@ -3,15 +3,14 @@
 //
 package com.acidmanic.commandline.commands;
 
-import com.acidmanic.commandline.commandnames.NameGeneratorBuilder;
 import com.acidmanic.commandline.utility.HelpGenerator;
 
 public class Help extends CommandBase {
 
     @Override
-    public void execute() {
+    public void execute(String[] args) {
         HelpGenerator generator
-                = new HelpGenerator(this.creatorFactory.getTypeRegistery_old());
+                = new HelpGenerator(this.creatorFactory.getTypeRegistery());
 
         String help = generator.generateHelp();
 
@@ -21,6 +20,16 @@ public class Help extends CommandBase {
     @Override
     protected String getUsageDescription() {
         return "Prints this help.";
+    }
+
+    @Override
+    protected String getArgumentsDesciption() {
+        return "";
+    }
+
+    @Override
+    public boolean hasArguments() {
+        return false;
     }
 
 }
