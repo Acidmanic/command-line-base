@@ -13,8 +13,8 @@ import java.util.HashSet;
  *
  * @author Mani Moayedi (acidmanic.moayedi@gmail.com)
  */
-public class TypeRegistery implements ITypeRegistery {
-    
+public class TypeRegistery {
+
     protected final ArrayList<String> allCommandClasses;
     protected final HashSet<String> commandsExistance;
 
@@ -25,24 +25,15 @@ public class TypeRegistery implements ITypeRegistery {
         registerClass(Version.class);
     }
 
-    @Override
     public final void registerClass(Class refType) {
         registerClass(refType.getName());
     }
 
-    @Override
     public void registerClass(String fullName) {
         if (commandsExistance.contains(fullName) == false) {
             commandsExistance.add(fullName);
             allCommandClasses.add(fullName);
         }
-    }
-
-    protected void putAllNames() {
-        registerClass(Command.class.getName());
-        registerClass(CommandBase.class.getName());
-        registerClass(BatchCommandBase.class.getName());
-        registerClass(Help.class.getName());
     }
 
     protected Class[] getAllInterfacesEver(Class cls) {
@@ -56,7 +47,6 @@ public class TypeRegistery implements ITypeRegistery {
         return ret.toArray(new Class[]{});
     }
 
-    @Override
     public boolean hasImplemented(Class subClass, Class superClass) {
         Class[] allInts = getAllInterfacesEver(subClass);
         for (Class c : allInts) {
@@ -67,7 +57,6 @@ public class TypeRegistery implements ITypeRegistery {
         return false;
     }
 
-    @Override
     public boolean isOfType(Class subClass, Class superClass) {
         if (superClass.isInterface()) {
             return hasImplemented(subClass, superClass);
@@ -94,12 +83,10 @@ public class TypeRegistery implements ITypeRegistery {
         return ret;
     }
 
-    @Override
     public ArrayList<String> getApplicationClassesNames() {
         return allCommandClasses;
     }
 
-    @Override
     public ArrayList<Class> getApplicationClasses() {
         ArrayList<Class> ret = new ArrayList<>();
         ArrayList<String> names = getApplicationClassesNames();
@@ -113,7 +100,6 @@ public class TypeRegistery implements ITypeRegistery {
         return ret;
     }
 
-    @Override
     public ArrayList<Class> getClasses(Class superClass) {
         ArrayList<Class> ret = new ArrayList<>();
         ArrayList<String> names = getApplicationClassesNames();
@@ -128,5 +114,5 @@ public class TypeRegistery implements ITypeRegistery {
         }
         return ret;
     }
-    
+
 }
