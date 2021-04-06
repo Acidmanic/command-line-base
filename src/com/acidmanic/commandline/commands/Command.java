@@ -15,10 +15,14 @@ public interface Command {
     /**
      *
      */
-    void execute();
-
-    void setArguments(String[] args);
-
+    void execute(String[] args);
+    
+    boolean accepts(String name);
+    
+    boolean hasArguments();
+    
+    String getArgSplitRegEx();
+    
     String getDescription();
 
     String getName();
@@ -39,4 +43,8 @@ public interface Command {
 
     void setNameGenerator(NameGenerator nameGenerator);
 
+    
+    
+    
+    
 }

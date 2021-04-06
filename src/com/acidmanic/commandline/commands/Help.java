@@ -11,7 +11,7 @@ public class Help extends CommandBase {
     @Override
     public void execute() {
         HelpGenerator generator
-                = new HelpGenerator(this.creatorFactory.getTypeRegistery());
+                = new HelpGenerator(this.creatorFactory.getTypeRegistery_old());
 
         String help = generator.generateHelp();
 
