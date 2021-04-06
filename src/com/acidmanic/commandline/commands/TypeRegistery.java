@@ -21,8 +21,6 @@ public class TypeRegistery {
     public TypeRegistery() {
         allCommandClasses = new ArrayList<>();
         commandsExistance = new HashSet<>();
-        registerClass(Help.class);
-        registerClass(Version.class);
     }
 
     public final void registerClass(Class refType) {
