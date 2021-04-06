@@ -3,9 +3,6 @@
 //
 package com.acidmanic.commandline.commands;
 
-import com.acidmanic.commandline.application.ExecutionEnvironment;
-import com.acidmanic.commandline.commandnames.NameGenerator;
-import com.acidmanic.commandline.utility.ArgumentValidationResult;
 import com.acidmanic.lightweight.logger.Logger;
 
 public interface Command {
@@ -14,6 +11,7 @@ public interface Command {
 
     /**
      *
+     * @param args arguments passed to this command
      */
     void execute(String[] args);
     
@@ -23,9 +21,7 @@ public interface Command {
     
     String getArgSplitRegEx();
     
-    String getDescription();
-
-    String getName();
+    String getHelpDescription();
 
     void setCreatorFactory(CommandFactory factory);
 
@@ -33,18 +29,7 @@ public interface Command {
 
     boolean isVisible();
 
-    ArgumentValidationResult validateArguments();
-
-    void setExecutionEnvironment(ExecutionEnvironment executionEnvironment);
-
-    ExecutionEnvironment getExecutionEnvironment();
-
     void setLogger(Logger logger);
-
-    void setNameGenerator(NameGenerator nameGenerator);
-
-    
-    
     
     
 }

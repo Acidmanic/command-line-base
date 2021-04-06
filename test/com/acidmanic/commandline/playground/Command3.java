@@ -39,7 +39,7 @@ public class Command3 extends CommandBase {
     }
 
     @Override
-    public String getUsageString() {
+    public String getUsageDescription() {
         return "This is a preformated description. this command has a long name which should break. it also will print the absolute path of given input file.";
     }
 

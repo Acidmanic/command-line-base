@@ -29,7 +29,7 @@ public class Argument1 extends CommandBase {
     }
 
     @Override
-    protected String getUsageString() {
+    protected String getUsageDescription() {
         return "This is a dummy usage string";
     }
 

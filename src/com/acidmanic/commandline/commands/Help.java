@@ -19,7 +19,7 @@ public class Help extends CommandBase {
     }
 
     @Override
-    protected String getUsageString() {
+    protected String getUsageDescription() {
         return "Prints this help.";
     }
 

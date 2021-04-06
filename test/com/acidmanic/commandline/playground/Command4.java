@@ -42,7 +42,7 @@ public class Command4 extends CommandBase{
     
     
     @Override
-    protected String getUsageString() {
+    protected String getUsageDescription() {
         return "This command can take some arguments and process as a nested "
                 + "command pattern";
     }

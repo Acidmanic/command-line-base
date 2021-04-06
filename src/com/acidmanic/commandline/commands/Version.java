@@ -22,7 +22,7 @@ public class Version extends CommandBase{
 
     
     @Override
-    protected String getUsageString() {
+    protected String getUsageDescription() {
         return "Prints the application version";
     }
 

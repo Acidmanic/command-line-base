@@ -17,7 +17,7 @@ public class NullCommand extends CommandBase {
     }
 
     @Override
-    public String getDescription() {
+    public String getHelpDescription() {
         return "No Such Command!";
     }
 
@@ -36,7 +36,7 @@ public class NullCommand extends CommandBase {
     }
 
     @Override
-    protected String getUsageString() {
+    protected String getUsageDescription() {
         return "";
     }
 

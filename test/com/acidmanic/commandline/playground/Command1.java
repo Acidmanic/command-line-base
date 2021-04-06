@@ -20,7 +20,7 @@ public class Command1 extends CommandBase {
     }
 
     @Override
-    public String getUsageString() {
+    public String getUsageDescription() {
         return "This is a long description for this comman. but this one does not contain new line charachter. "
                 + "so this description is supposed break through wrapping process. on the debug line its not "
                 + "happening any soon, maybe 100 chars is long enough. and can hold a long text to be seen.";
