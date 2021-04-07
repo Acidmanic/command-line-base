@@ -52,6 +52,15 @@ public abstract class FractalCommandBase<TContext extends ExecutionContext> exte
         
         HashMap<Command,String[]> sublevels = factory.make(args, false);
         
+        for(Command command : sublevels.keySet()){
+            if(command.getClass().equals(Help.class)){
+                
+                command.execute(sublevels.get(command));
+                
+                return;
+            }
+        }
+        
         sublevels.forEach( (c,ar) -> c.execute(ar));
         
         execute(context);
