@@ -56,11 +56,17 @@ public abstract class CommandBase implements Command {
 
         argumentsDescription = indentDescription(argumentsDescription);
 
-        return getUsageDescription() + " \n" + argumentsDescription;
+        String help = getUsageDescription();
+
+        if (argumentsDescription.length() > 0) {
+
+            help = help + "\n" + argumentsDescription;
+        }
+        return help;
     }
 
     protected String indentDescription(String description) {
-        return description.replaceAll("\\n", "\n\t");
+        return description.replaceAll("\\n", "\n  ");
     }
 
     @Override
@@ -68,10 +74,10 @@ public abstract class CommandBase implements Command {
         this.context = context;
     }
 
-    protected <TContext> TContext getContext(){
+    protected <TContext> TContext getContext() {
         return (TContext) context;
     }
-    
+
     @Override
     public boolean isVisible() {
         return true;
@@ -98,7 +104,7 @@ public abstract class CommandBase implements Command {
         this.logger.log(text);
     }
 
-    protected Logger getLogger(){
+    protected Logger getLogger() {
         return this.logger;
     }
 }
