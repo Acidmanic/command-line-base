@@ -7,6 +7,8 @@ import com.acidmanic.commandline.commands.context.ExecutionContext;
 import com.acidmanic.lightweight.logger.ConsoleLogger;
 import com.acidmanic.lightweight.logger.Logger;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class CommandFactory {
 
@@ -43,13 +45,13 @@ public class CommandFactory {
      * delimiter
      * @return Returns the list of extracted commands with their arguments lists
      */
-    public HashMap<Command, String[]> make(String[] args, boolean topLevel) {
+    public Map<Command, String[]> make(String[] args, boolean topLevel) {
 
         CommandExtractionStrategy strategy = topLevel?
                 new TopLevelExtractionStrategy(typeRegistery):
                 new ArgumentLevelExtractionStrategy(typeRegistery);
         
-        HashMap<Command, String[]> commands = strategy.extract(args);
+        Map<Command, String[]> commands = strategy.extract(args);
         
         commands.forEach((c,ar) -> c.setLogger(logger));
         
@@ -60,7 +62,7 @@ public class CommandFactory {
         return commands;
     }
     
-    public HashMap<Command, String[]> make(String[] args) {
+    public Map<Command, String[]> make(String[] args) {
         return this.make(args,false);
     }
 }

@@ -7,7 +7,8 @@ package com.acidmanic.commandline.commands.commandextraction;
 
 import com.acidmanic.commandline.commands.Command;
 import com.acidmanic.commandline.commands.TypeRegistery;
-import java.util.HashMap;
+import com.acidmanic.commandline.utility.PutOrderedMap;
+import java.util.Map;
 
 /**
  *
@@ -20,9 +21,9 @@ public class TopLevelExtractionStrategy extends CommandExtractionStrategyBase {
     }
 
     @Override
-    public HashMap<Command, String[]> extract(String[] arguments) {
+    public Map<Command, String[]> extract(String[] arguments) {
 
-        HashMap<Command, String[]> commands = new HashMap<>();
+        Map<Command, String[]> commands = new PutOrderedMap<>();
 
         if (arguments != null && arguments.length > 0) {
 

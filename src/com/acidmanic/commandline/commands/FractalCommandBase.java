@@ -9,6 +9,7 @@ import com.acidmanic.commandline.commands.context.ExecutionContext;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -71,7 +72,7 @@ public abstract class FractalCommandBase<TContext extends ExecutionContext> exte
 
         CommandFactory factory = new CommandFactory(this.subCommandsTypeRegistery, this.getLogger(), context);
 
-        HashMap<Command, String[]> sublevels = factory.make(args, false);
+        Map<Command, String[]> sublevels = factory.make(args, false);
 
         for (Command command : sublevels.keySet()) {
             if (command.getClass().equals(Help.class)) {

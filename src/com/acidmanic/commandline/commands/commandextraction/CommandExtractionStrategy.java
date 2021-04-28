@@ -6,7 +6,7 @@
 package com.acidmanic.commandline.commands.commandextraction;
 
 import com.acidmanic.commandline.commands.Command;
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -15,5 +15,5 @@ import java.util.HashMap;
 public interface CommandExtractionStrategy {
     
     
-    HashMap<Command,String[]> extract(String[] arguments);
+    Map<Command,String[]> extract(String[] arguments);
 }
