@@ -7,7 +7,6 @@ package com.acidmanic.commandline.commands;
 
 import com.acidmanic.commandline.commands.context.ExecutionContext;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +37,7 @@ public abstract class FractalCommandBase<TContext extends ExecutionContext> exte
 
         for (Command argument : this.subCommands) {
 
-            String argumentName = argument.getClass().getSimpleName();
+            String argumentName = argument.getName();
 
             argumentsDescription += argumentName + ": "
                     + argument.getHelpDescription() + "\n";
@@ -59,7 +58,7 @@ public abstract class FractalCommandBase<TContext extends ExecutionContext> exte
         if (hasArguments()) {
 
             String argumentsDescription = getArgumentsDesciption().trim();
-            
+
             help = help + "\n\nArguments:\n" + argumentsDescription;
         }
         return help;
