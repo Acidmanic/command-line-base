@@ -24,13 +24,18 @@ public class HelpGenerator {
     private final static int WIDTH_DESCRIPTION = 100;
 
     public HelpGenerator(TypeRegistery registery) {
+
         this.helps = new HashMap<>();
+
         ArrayList<Class> commands = registery.getClasses(Command.class);
+
         for (Class commandClass : commands) {
             try {
                 Command command = (Command) commandClass.newInstance();
+
                 if (command.isVisible()) {
-                    this.helps.put(command.getClass().getSimpleName(), command.getHelpDescription());
+
+                    this.helps.put(command.getName(), command.getHelpDescription());
                 }
             } catch (Exception e) {
             }
@@ -42,17 +47,23 @@ public class HelpGenerator {
         return generateHelp(null);
     }
 
-
     public String generateHelp(AsciiBorder border) {
+
         TableBuilder builder = new TableBuilder();
+
         Padding padding = new Padding(1, 0, 1, 0);
+
         for (String name : helps.keySet()) {
+
             String description = helps.get(name);
-            builder.row().cell(name).maximumWidth(WIDTH_NAME)
-                    .cell(description).maximumWidth(WIDTH_DESCRIPTION);
+
+            builder.row().cell(name)
+                    .maximumWidth(WIDTH_NAME)
+                    .cell(description)
+                    .maximumWidth(WIDTH_DESCRIPTION);
         }
+
         return builder.padAll(padding).borderAll(border)
                 .build().render();
     }
-
 }

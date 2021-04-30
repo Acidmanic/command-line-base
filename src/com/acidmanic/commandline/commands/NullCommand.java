@@ -17,7 +17,7 @@ public class NullCommand implements Command {
 
     private Logger logger = new ConsoleLogger();
     private CommandFactory factory = null;
-    
+
     @Override
     public void execute(String[] args) {
         this.logger.log("No such command.");
@@ -64,9 +64,12 @@ public class NullCommand implements Command {
     }
 
     @Override
-    public void setContext(ExecutionContext context) {    }
+    public void setContext(ExecutionContext context) {
+    }
 
-    
-
+    @Override
+    public String getName() {
+        return "Null Command";
+    }
 
 }

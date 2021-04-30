@@ -30,8 +30,8 @@ public abstract class CommandBase implements Command {
 
     @Override
     public boolean accepts(String name) {
-        return this.getClass().getSimpleName().toLowerCase()
-                .equals(name.toLowerCase());
+        return this.getClass().getSimpleName()
+                .equalsIgnoreCase(name);
     }
 
     @Override
@@ -83,6 +83,11 @@ public abstract class CommandBase implements Command {
         return true;
     }
 
+    @Override
+    public String getName() {
+        return this.getClass().getSimpleName();
+    }
+    
     @Override
     public void setLogger(Logger logger) {
         this.logger = logger;

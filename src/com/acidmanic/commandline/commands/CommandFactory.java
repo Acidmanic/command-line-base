@@ -6,8 +6,6 @@ import com.acidmanic.commandline.commands.commandextraction.TopLevelExtractionSt
 import com.acidmanic.commandline.commands.context.ExecutionContext;
 import com.acidmanic.lightweight.logger.ConsoleLogger;
 import com.acidmanic.lightweight.logger.Logger;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CommandFactory {

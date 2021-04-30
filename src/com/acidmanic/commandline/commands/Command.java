@@ -33,5 +33,7 @@ public interface Command {
     void setLogger(Logger logger);
     
     void setContext(ExecutionContext context);
+    
+    String getName();
         
 }

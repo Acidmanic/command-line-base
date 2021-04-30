@@ -34,6 +34,7 @@
                         <manifestFile>manifest.mf</manifestFile>
                     </archive>
                 </configuration>
+                <version>3.2.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
